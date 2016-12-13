@@ -1,5 +1,9 @@
-print "hi"
-print "This is darren's game, welcome!"
-table_file = open('abhi.html', 'w')
-table_file.write('<!DOCTYPE html><html><body>')
-table_file.close()
+f = open('game.html','w')
+
+message = """<html>
+<head></head>
+<body><p>Hello World!</p></body>
+</html>"""
+
+f.write(message)
+f.close()
