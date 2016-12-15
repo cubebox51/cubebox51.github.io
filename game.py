@@ -1,4 +1,6 @@
-from datetime import datetime
-now = datetime.now()
+user_input = input("Whats 9 + 10")
 
-print '%s/%s/%s' % (now.month, now.day, now.year)
+if (user_input) == 21:
+    print("You Stupid")
+else:
+    print("You Smart")
