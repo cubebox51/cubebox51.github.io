@@ -1,9 +1,4 @@
-f = open('game.html','w')
-
-message = """<html>
-<head></head>
-<body><p>Hello World!</p></body>
-</html>"""
-
-f.write(message)
-f.close()
+now = datetime.now()
+from datetime import datetime
+print now.hour : now.minute
+print now.month / now.day / now.year
