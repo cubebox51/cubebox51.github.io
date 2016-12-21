@@ -1,8 +1,8 @@
-user_input = int(user_input)
 print ("Hello welcome to Mcdonald's how may I help you")
 print ("Type 1 for food")
 print ("Type 2 for drinks")
 user_input = input ("Type 3 for money")
+user_input = int(user_input)
 print (user_input)
 if (user_input) == 1:
     print ("We have Hamburgers, fries, and cancer")
