@@ -1,3 +1,4 @@
+user_input = int(user_input)
 print ("Hello welcome to Mcdonald's how may I help you")
 print ("Type 1 for food")
 print ("Type 2 for drinks")
