@@ -20,7 +20,7 @@ if (user_input) == 1:
         user_input = input ("Potato!")
     elif (user_input) == 3:
         user_input = input ("Sorry we are out of cancer")
-if (user_input) == 2:
+elif (user_input) == 2:
     print ("We have Coke, and Pepsi")
     print ("Type 1 for Coke")
     user_input = input ("Type 2 for Pepsi")
@@ -32,7 +32,7 @@ if (user_input) == 2:
         user_input = input ("Type 2 to steal")
         if (user_input) == 2:
             user_input = input ("HEY COME BACK AND PAY!")
-if (user_input) == 3:
+elif (user_input) == 3:
     print ("So heres the plan you take the register ill destract the others.")
     print ("Type 1 To call the cops")
     user_input = input ("Type 2 to do the plan")
