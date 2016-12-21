@@ -29,7 +29,9 @@ elif int(user_input) == 2:
         print ("Nice I LOVE Pepsi Coke sucks that will cost you $1.00")
         print ("Type 1 to pay")
         user_input = input ("Type 2 to steal")
-        if int(user_input) == 2:
+        if int(user_input) == 1:
+            user_input = input ("Thank you for comming")
+        elif int(user_input) == 2:
             user_input = input ("HEY COME BACK AND PAY!")
 elif int(user_input) == 3:
     print ("So heres the plan you take the register ill destract the others.")
