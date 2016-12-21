@@ -2,6 +2,7 @@ print ("Hello welcome to Mcdonald's how may I help you")
 print ("Type 1 for food")
 print ("Type 2 for drinks")
 user_input = input ("Type 3 for money")
+print (user_input)
 if (user_input) == 1:
     print ("We have Hamburgers, fries, and cancer")
     print ("Type 1 for hamburgers")
@@ -41,6 +42,6 @@ if (user_input) == 3:
         user_input = input ("You got $150 for doing the plan")
 else:
     print ("Sorry I did not get your order")
-raw_input("Press Enter To Exit")
+input("Press Enter To Exit")
 
         
