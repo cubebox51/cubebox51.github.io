@@ -39,4 +39,5 @@ if (user_input) == 3:
         user_input = input ("You got $150 for calling the cops")
     elif (user_input) == 2:
         user_input = input ("You got $150 for doing the plan")
+
         
