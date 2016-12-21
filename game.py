@@ -41,6 +41,6 @@ if (user_input) == 3:
         user_input = input ("You got $150 for doing the plan")
 else:
     print "Sorry I did not get your order"
-raw_input("Press Enter To Exit OK dsjhaiudhgausgdyasgdyasgdgsdguasdhgsudgaudghusdgahdgsaudgashdgaysdgyagsdygaysdgasdasdada")
+raw_input("Press Enter To Exit OK dsjhaiudhgausgdyasgdyasgdgsdguasdhgsudgaudghusdgahdgsaudgashdgaysdgyagsdygaysdgasdasdada;)")
 
         
