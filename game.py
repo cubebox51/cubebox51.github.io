@@ -64,12 +64,31 @@ def Eat():
     
     input("Press Enter To Exit")
 
+def work():
+    global gain
+    gain = 1
+    from random import randint
+    work1 = (randint(0,9))
+    work2 = input(work1)
+    if int(work2) == int(work1):
+        print "you gained 1 Dollars"
+        user_input = input ("Type 1 to work again")
+        money = float(money) + float(gain)
+        if int(user_input) == 1:
+            work()
+    else:
+        print "You lost 1 Dollar"
+        user_input = input ("Type 1 to work again")
+        money = float(money) + float(gain)
+        if int(user_input) == 1:
+            work()
+work()
+
 print ("Welcome to Life Simulater")
 print ("Type 1 to Work")
 user_input = input ("Type 2 to go to Mcdonalds")
 if int(user_input) == 1:
-    print ("Under Dev")
-    print ("Redirecting to Mcdonalds")
+    work()
 if int(user_input) == 2:
     Eat()
 
