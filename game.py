@@ -5,7 +5,7 @@ if int(user_input) == 1:
     print ("Under Dev")
     print ("Redirecting to Mcdonalds")
 if int(user_input) == 2:
-        Eat()
+    Eat()
 def Eat():
     global money    
     global plan
