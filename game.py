@@ -71,13 +71,13 @@ def work():
     work1 = (randint(0,9))
     work2 = input(work1)
     if int(work2) == int(work1):
-        print "you gained 1 Dollars"
+        print ("you gained 1 Dollars")
         user_input = input ("Type 1 to work again")
         money = float(money) + float(gain)
         if int(user_input) == 1:
             work()
     else:
-        print "You lost 1 Dollar"
+        print ("You lost 1 Dollar")
         user_input = input ("Type 1 to work again")
         money = float(money) + float(gain)
         if int(user_input) == 1:
