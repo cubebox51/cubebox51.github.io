@@ -1,18 +1,20 @@
-money = str(15)
-plan = str(150)
-drink = str(1)
-food = str(1.25)
-
 print ("Welcome to Life Simulater")
 print ("Type 1 to Work")
 user_input = input ("Type 2 to go to Mcdonalds")
 if int(user_input) == 1:
     print ("Under Dev")
+    print ("Redirecting to Mcdonalds")
 if int(user_input) == 2:
-    Eat()
-
-
+        Eat()
 def Eat():
+    global money    
+    global plan
+    global drink
+    global food
+    money = 15
+    plan = 150
+    drink = 1
+    food = 1.25
     print ("Hello welcome to Mcdonald's how may I help you")
     print ("Type 1 for food")
     print ("Type 2 for drinks")
@@ -55,14 +57,17 @@ def Eat():
         print ("Type 1 To call the cops")
         user_input = input ("Type 2 to do the plan")
         if int(user_input) == 1:
+            money = float(money) + float(plan)
             print ("You got $150 for calling the cops")
-            print ("You now have") + (money + plan) + ("dollars")
+            print('You now have {0} Dollars '.format(money))
         elif int(user_input) == 2:
+            money = float(money) + float(plan)
             print ("You got $150 for doing the plan")
-            print ("You now have") + (money + plan) + ("dollars")
+            print('You now have {0} Dollars '.format(money))
     else:
         print ("Sorry I did not get your order")
         Eat()
+    
     input("Press Enter To Exit")
 Eat()
 
