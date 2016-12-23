@@ -1,11 +1,3 @@
-print ("Welcome to Life Simulater")
-print ("Type 1 to Work")
-user_input = input ("Type 2 to go to Mcdonalds")
-if int(user_input) == 1:
-    print ("Under Dev")
-    print ("Redirecting to Mcdonalds")
-if int(user_input) == 2:
-    Eat()
 def Eat():
     global money    
     global plan
@@ -71,6 +63,14 @@ def Eat():
         Eat()
     
     input("Press Enter To Exit")
-Eat()
+
+print ("Welcome to Life Simulater")
+print ("Type 1 to Work")
+user_input = input ("Type 2 to go to Mcdonalds")
+if int(user_input) == 1:
+    print ("Under Dev")
+    print ("Redirecting to Mcdonalds")
+if int(user_input) == 2:
+    Eat()
 
         
