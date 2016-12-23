@@ -82,7 +82,6 @@ def work():
         money = float(money) + float(gain)
         if int(user_input) == 1:
             work()
-work()
 
 print ("Welcome to Life Simulater")
 print ("Type 1 to Work")
