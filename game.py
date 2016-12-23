@@ -30,7 +30,8 @@ def Eat():
             user_input = input ("Type 2 to steal")
             if int(user_input) == 1:
                 print ("Thank you for comming")
-                print ("You now have") + (money - food) + ("dollars")
+                money = float(money) - float(food)
+                print ("You now have") + (money) + ("dollars")
             elif int(user_input) == 2:
                 print ("HEY COME BACK AND PAY!") 
         elif int(user_input) == 2:
@@ -49,7 +50,8 @@ def Eat():
             user_input = input ("Type 2 to steal")
             if int(user_input) == 1:
                 print ("Thank you for comming")
-                print ("You now have") + (money - drink) + ("dollars")
+                money = float(money) - float(drink)
+                print ("You now have") + (money) + ("dollars")
             elif int(user_input) == 2:
                 print ("HEY COME BACK AND PAY!")
     elif int(user_input) == 3:
