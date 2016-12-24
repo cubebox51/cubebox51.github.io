@@ -82,28 +82,47 @@ def work():
         print ("you gained 1 Dollars")
         money = float(money) + float(gain)
         print('You now have {0} Dollars '.format(money))
-        user_input = input ("Type 1 to work again")
+        print("Type 1 to work again") 
+        user_input = input ("Type 2 to go to main menu")
         if int(user_input) == 1:
             work()
+        if int(user_input) == 2:
+            menu()
     else:
         print ("You lost 1 Dollar")
-        money = float(money) - float(gain)
-        print('You now have {0} Dollars '.format(money))
-        user_input = input ("Type 1 to work again")
-        if int(user_input) == 1:
-            work()
-
-print ("Welcome to Life Simulater")
-print ("Type 1 to Work")
-print ("Type 2 to go to Mcdonalds")
-user_input = input('You have {0} dollars '.format(money))
-if int(user_input) == 1:
-    work()
-elif int(user_input) == 2 and (money) > 1:
-    Eat()
-else:
-    print ("You need more money")
-    input("Press Enter To Exit")
+        if money > 0:
+            money = float(money) - float(gain)
+            print('You now have {0} Dollars '.format(money))
+            print("Type 1 to work again") 
+            user_input = input ("Type 2 to go to main menu")
+            if int(user_input) == 1:
+                work()
+            if int(user_input) == 2:
+                menu()
+        else:
+            print('You now have {0} Dollars '.format(money))
+            print("Type 1 to work again") 
+            user_input = input ("Type 2 to go to main menu")
+            if int(user_input) == 1:
+                work()
+            if int(user_input) == 2:
+                menu()
+def menu():
+    print ("Welcome to Life Simulater")
+    print ("Type 1 to Work")
+    print ("Type 2 to go to Mcdonalds")
+    user_input = input('You have {0} dollars '.format(money))
+    if int(user_input) == 1:
+        work()
+    elif int(user_input) == 2 and (money) > 1:
+        Eat()
+    else:
+        print ("You need more money")
+        menu()
+menu()
 
         
+
+
+
 
