@@ -66,6 +66,8 @@ def Eat():
 
 def work():
     global gain
+    global money
+    money = 15
     gain = 1
     from random import randint
     work1 = (randint(0,9))
