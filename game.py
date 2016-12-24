@@ -2,7 +2,6 @@ global money
 global plan
 global drink
 global food
-money = 15
 plan = 150
 drink = 1
 food = 1.25
