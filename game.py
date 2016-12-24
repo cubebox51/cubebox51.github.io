@@ -2,6 +2,7 @@ global money
 global plan
 global drink
 global food
+money = 0
 plan = 150
 drink = 1
 food = 1.25
@@ -94,10 +95,15 @@ def work():
 
 print ("Welcome to Life Simulater")
 print ("Type 1 to Work")
-user_input = input ("Type 2 to go to Mcdonalds")
+print ("Type 2 to go to Mcdonalds")
+user_input = input('You have {0} dollars '.format(money))
 if int(user_input) == 1:
     work()
-if int(user_input) == 2:
+elif int(user_input) == 2 and (money) > 1:
     Eat()
+else:
+    print ("You need more money")
+    input("Press Enter To Exit")
 
         
+
