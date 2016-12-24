@@ -27,7 +27,7 @@ def Eat():
             if int(user_input) == 1:
                 print ("Thank you for comming")
                 money = float(money) - float(food)
-                print ("You now have") + (money) + ("dollars")
+                print('You now have {0} Dollars '.format(money))
             elif int(user_input) == 2:
                 print ("HEY COME BACK AND PAY!") 
         elif int(user_input) == 2:
@@ -47,7 +47,7 @@ def Eat():
             if int(user_input) == 1:
                 print ("Thank you for comming")
                 money = float(money) - float(drink)
-                print ("You now have") + (money) + ("dollars")
+                print('You now have {0} Dollars '.format(money))
             elif int(user_input) == 2:
                 print ("HEY COME BACK AND PAY!")
     elif int(user_input) == 3:
