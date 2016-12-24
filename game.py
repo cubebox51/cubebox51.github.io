@@ -1,12 +1,16 @@
+global money    
+global plan
+global drink
+global food
+money = 15
+plan = 150
+drink = 1
+food = 1.25
 def Eat():
     global money    
     global plan
     global drink
     global food
-    money = 15
-    plan = 150
-    drink = 1
-    food = 1.25
     print ("Hello welcome to Mcdonald's how may I help you")
     print ("Type 1 for food")
     print ("Type 2 for drinks")
