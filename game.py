@@ -66,7 +66,15 @@ def Eat():
         print ("Sorry I did not get your order")
         Eat()
     
-    input("Press Enter To Exit")
+    print ("Type 1 to order again")
+    user_input = input ("Type 2 for main menu")
+    if int(user_input) == 1 and (money) > 1:
+        Eat()
+    elif int(user_input) == 2:
+        menu()
+    else:
+        menu()
+    
 
 def work():
     global gain
@@ -122,6 +130,7 @@ def menu():
 menu()
 
         
+
 
 
 
