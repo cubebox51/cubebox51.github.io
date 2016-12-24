@@ -67,21 +67,25 @@ def Eat():
 def work():
     global gain
     global money
-    money = 15
     gain = 1
     from random import randint
-    work1 = (randint(0,9))
-    work2 = input(work1)
-    if int(work2) == int(work1):
+    work1 = (randint(1,20))
+    hours = (randint(1,8))
+    answer = float(work1) * float(hours)
+    print('Bob worked {0} hours and got {1} dollars per hour '.format(hours,work1))
+    work2 = input('How much money did bob make')
+    if int(work2) == int(answer):
         print ("you gained 1 Dollars")
-        user_input = input ("Type 1 to work again")
         money = float(money) + float(gain)
+        print('You now have {0} Dollars '.format(money))
+        user_input = input ("Type 1 to work again")
         if int(user_input) == 1:
             work()
     else:
         print ("You lost 1 Dollar")
+        money = float(money) - float(gain)
+        print('You now have {0} Dollars '.format(money))
         user_input = input ("Type 1 to work again")
-        money = float(money) + float(gain)
         if int(user_input) == 1:
             work()
 
