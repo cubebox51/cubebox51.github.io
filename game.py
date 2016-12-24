@@ -2,6 +2,10 @@ global money
 global plan
 global drink
 global food
+global drinks
+global foods
+drinks = 0
+foods = 0
 money = 0
 plan = 150
 drink = 1
@@ -11,6 +15,8 @@ def Eat():
     global plan
     global drink
     global food
+    global drinks
+    global foods
     print ("Hello welcome to Mcdonald's how may I help you")
     print ("Type 1 for food")
     print ("Type 2 for drinks")
@@ -28,7 +34,8 @@ def Eat():
                 print ("Thank you for comming")
                 money = float(money) - float(food)
                 print('You now have {0} Dollars '.format(money))
-            elif int(user_input) == 2:
+            foods = float(foods) + (1)
+            if int(user_input) == 2:
                 print ("HEY COME BACK AND PAY!") 
         elif int(user_input) == 2:
             print ("Potato!")
@@ -50,6 +57,7 @@ def Eat():
                 print('You now have {0} Dollars '.format(money))
             elif int(user_input) == 2:
                 print ("HEY COME BACK AND PAY!")
+            drinks = float(drinks) + (1)
     elif int(user_input) == 3:
         print ("So heres the plan you take the register ill destract the others.")
         print ("Type 1 To call the cops")
@@ -115,23 +123,34 @@ def work():
                 work()
             if int(user_input) == 2:
                 menu()
+def items():
+    print('You have a wallet (${0})  '.format(foods))
+    if int(foods) > 0: 
+        print('You have {0} hamburgers '.format(foods))
+    if int(drinks) > 0:
+        print('You have {0} Pepsi '.format(drinks))
+    user_input = input ("Type 1 to go to main menu")
+    if int(user_input) == 1:
+        menu()
+    menu()
 def menu():
     print ("Welcome to Life Simulater")
     print ("Type 1 to Work")
     print ("Type 2 to go to Mcdonalds")
+    print ("Type 3 to see your inventory")
     user_input = input('You have {0} dollars '.format(money))
     if int(user_input) == 1:
         work()
     elif int(user_input) == 2 and (money) > 1:
         Eat()
+    if int(user_input) == 3:
+        items()
+    
     else:
         print ("You need more money")
         menu()
 menu()
 
         
-
-
-
 
 
