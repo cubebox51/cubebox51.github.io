@@ -124,7 +124,7 @@ def work():
             if int(user_input) == 2:
                 menu()
 def items():
-    print('You have a wallet (${0})  '.format(foods))
+    print('You have a wallet (${0})  '.format(money))
     if int(foods) > 0: 
         print('You have {0} hamburgers '.format(foods))
     if int(drinks) > 0:
