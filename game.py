@@ -93,6 +93,7 @@ def Eat():
 def work():
     global gain
     global money
+    global energy
     gain = 1
     from random import randint
     work1 = (randint(1,20))
@@ -106,6 +107,7 @@ def work():
         print('You now have {0} Dollars '.format(money))
         print("Type 1 to work again") 
         user_input = input ("Type 2 to go to main menu")
+        energy = float(energy) - float(gain)
         if int(user_input) == 1:
             work()
         if int(user_input) == 2:
@@ -117,6 +119,7 @@ def work():
             print('You now have {0} Dollars '.format(money))
             print("Type 1 to work again") 
             user_input = input ("Type 2 to go to main menu")
+            energy = float(energy) - float(gain)
             if int(user_input) == 1:
                 work()
             if int(user_input) == 2:
@@ -125,6 +128,7 @@ def work():
             print('You now have {0} Dollars '.format(money))
             print("Type 1 to work again") 
             user_input = input ("Type 2 to go to main menu")
+            energy = float(energy) - float(gain)
             if int(user_input) == 1:
                 work()
             if int(user_input) == 2:
@@ -159,8 +163,4 @@ def menu():
         print ("You need more money")
         menu()
 menu()
-
-        
-
-
 
