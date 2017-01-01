@@ -4,6 +4,12 @@ global drink
 global food
 global drinks
 global foods
+global hunger
+global thirst
+global energy
+hunger = 10
+thirst = 10
+energy = 10
 drinks = 0
 foods = 0
 money = 0
@@ -138,6 +144,9 @@ def menu():
     print ("Type 1 to Work")
     print ("Type 2 to go to Mcdonalds")
     print ("Type 3 to see your inventory")
+    print('You have {0} / 10 hunger'.format(hunger))
+    print('You have {0} / 10 thirst'.format(thirst))
+    print('You have {0} / 10 energy'.format(energy))
     user_input = input('You have {0} dollars '.format(money))
     if int(user_input) == 1:
         work()
@@ -152,5 +161,6 @@ def menu():
 menu()
 
         
+
 
 
