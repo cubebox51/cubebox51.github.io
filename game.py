@@ -133,14 +133,41 @@ def work():
                 work()
             if int(user_input) == 2:
                 menu()
+def timer():
+    import time
+    global thirst
+    global hunger
+    if int(hunger) > 0 or int(hunger) > 0:
+        time.sleep(1)
+        thrist = float(thirst) - (.01)
+        hunger = float(hunger) - (.01)
+    else:
+        print ("YOU DED GG")
+
+
+
 def items():
+    global energy
+    global money
+    global hunger
+    global thirst
+    global foods
+    global drinks
     print('You have a wallet (${0})  '.format(money))
     if int(foods) > 0: 
-        print('You have {0} hamburgers '.format(foods))
+        print('You have {0} hamburgers type 1 to eat hamburger'.format(foods))
     if int(drinks) > 0:
-        print('You have {0} Pepsi '.format(drinks))
-    user_input = input ("Type 1 to go to main menu")
-    if int(user_input) == 1:
+        print('You have {0} Pepsi type 2 to drink Pepsi'.format(drinks))
+    user_input = input('Type 3 to go to main menu')
+    if int(user_input) == 1 and int(foods) > 0:
+        hunger = float(hunger) + (3)
+        energy = float(energy) + (3)
+        foods = float(foods) - (1)
+    if int(user_input) == 2 and int(drinks) > 0:
+        thirst = float(thirst) + (2)
+        energy = float(energy) + (1)
+        drinks = float(drinks) - (1)
+    if int(user_input) == 3:
         menu()
     menu()
 def menu():
@@ -162,5 +189,8 @@ def menu():
     else:
         print ("You need more money")
         menu()
+timer()
 menu()
+
+
 
