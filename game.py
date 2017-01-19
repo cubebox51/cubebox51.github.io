@@ -4,6 +4,8 @@
 #                                                                              #
 #                                                                              #
 ################################################################################
+import datetime
+import time
 global money    
 global plan
 global drink
@@ -14,6 +16,12 @@ global hunger
 global thirst
 global energy
 global wanted
+global now
+global timer
+global timer2
+timer2 = 0
+now = datetime.datetime.now()
+timer = ('{0}{1}'.format(now.hour, now.minute))
 hunger = 10
 thirst = 10
 energy = 10
@@ -141,17 +149,6 @@ def work():
                 work()
             if int(user_input) == 2:
                 menu()
-def timer():
-    import time
-    global thirst
-    global hunger
-    if int(hunger) > 0 or int(hunger) > 0:
-        time.sleep(1)
-        thrist = float(thirst) - (.01)
-        hunger = float(hunger) - (.01)
-    else:
-        print ("YOU DED GG")
-
 
 
 def items():
@@ -178,8 +175,29 @@ def items():
     if int(user_input) == 3:
         menu()
     menu()
+def dead():
+    input("gg dude you ded")
+    
 def menu():
+    global wanted
+    global now
+    global timer
+    global hunger
+    global thirst
     global money
+    now = datetime.datetime.now()
+    timer2 = ('{0}{1}'.format(now.hour, now.minute))
+    if (0) > (hunger) or (0) > (thirst):
+        dead()
+    if (wanted) > (9):
+        money = float(thirst) - (50)
+        wanted = 0
+    if (timer2) > (timer):
+        thirst = float(thirst) - (1)
+        hunger = float(hunger) - (1)
+        timer = float(timer) + (1)
+        timer = ('{0}{1}'.format(now.hour, now.minute))
+        menu()
     print ("Welcome to Life Simulater")
     print ("Type 1 to Work")
     print ("Type 2 to go to Mcdonalds")
@@ -196,14 +214,20 @@ def menu():
     elif int(user_input) == 3:
         items()
     elif int(user_input) == 795535:
-        money = float(money) + (100000000000000000000)
+        money = float(money) + (1000)
         menu()
+
     
     else:
         print ("You need more money")
         menu()
-timer()
 menu()
+
+
+        
+
+
+
 
 
         
