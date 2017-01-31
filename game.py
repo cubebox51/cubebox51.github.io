@@ -7,20 +7,29 @@
 import datetime
 import time
 from random import randint
-timer2 = 0
-now = datetime.datetime.now()
-timer = ('{0}{1}'.format(now.hour, now.minute))
-hunger = 10
-thirst = 10
-energy = 10
-drinks = 0
-foods = 0
-money = 0
-plan = 150
-drink = 1
-food = 1.25
-wanted = 0
-gun = 0
+if start == 1:
+    cheese = 1
+else:
+    start = 1
+    timer2 = 0
+    now = datetime.datetime.now()
+    timer = ('{0}{1}'.format(now.hour, now.minute))
+    hunger = 10
+    thirst = 10
+    energy = 10
+    drinks = 0
+    foods = 0
+    money = 0
+    plan = 150
+    drink = 1
+    food = 1.25
+    wanted = 0
+    gun = 0
+
+print ("Chapter 1")
+print ("The Big City")
+time.sleep(1)
+print ("You lost your brother recently and are very sad about it but something about his death bugs you the doctors told you that he died of a heart attack but you dont belive this and think he was murdered he used to write in a diary and he would keep it with him whenever he went to Mcdonalds You decide to move to the Big City")
 def Eat():
     try:
         global money    
@@ -217,7 +226,6 @@ def menu():
         timer = float(timer) + (1)
         timer = ('{0}{1}'.format(now.hour, now.minute))
         menu()
-    print ("Welcome to Life Simulater")
     print ("Type 1 to Work")
     print ("Type 2 to go to Mcdonalds")
     print ("Type 3 to see your inventory")
@@ -244,8 +252,6 @@ menu()
 
 
         
-
-
 
 
 
