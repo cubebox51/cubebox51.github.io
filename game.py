@@ -6,19 +6,7 @@
 ################################################################################
 import datetime
 import time
-global money    
-global plan
-global drink
-global food
-global drinks
-global foods
-global hunger
-global thirst
-global energy
-global wanted
-global now
-global timer
-global timer2
+from random import randint
 timer2 = 0
 now = datetime.datetime.now()
 timer = ('{0}{1}'.format(now.hour, now.minute))
@@ -32,8 +20,8 @@ plan = 150
 drink = 1
 food = 1.25
 wanted = 0
+gun = 0
 def Eat():
-    from random import randint
     try:
         global money    
         global plan
@@ -42,10 +30,12 @@ def Eat():
         global drinks
         global foods
         global wanted
+        global gun
         print (" Hello welcome to Mcdonald's how may I help you")
         print ("\r Type 1 for food")
         print ("\r Type 2 for drinks")
-        user_input = input ("\r Type 3 for money")
+        print ("\r Type 3 for money")
+        user_input = input ("\r Type 4 to walk over to the shady guy")
         if int(user_input) == 1:
             print (" We have Hamburgers, fries, and cancer")
             print ("\r Type 1 for hamburgers")
@@ -61,7 +51,9 @@ def Eat():
                     print('You now have {0} Dollars '.format(money))
                 foods = float(foods) + (1)
                 if int(user_input) == 2:
-                    print ("HEY COME BACK AND PAY!") 
+                    print ("HEY COME BACK AND PAY!")
+                    wanted = float(wanted) + (1) 
+                    print('Your wanted level is now {0}'.format(wanted))
             elif int(user_input) == 2:
                 print ("Potato!")
             elif int(user_input) == 3:
@@ -82,6 +74,8 @@ def Eat():
                     print('You now have {0} Dollars '.format(money))
                 elif int(user_input) == 2:
                     print ("HEY COME BACK AND PAY!")
+                    wanted = float(wanted) + (1) 
+                    print('Your wanted level is now {0}'.format(wanted))
                 drinks = float(drinks) + (1)
         elif int(user_input) == 3:
             print ("So heres the plan you take the register ill destract the others.")
@@ -93,7 +87,22 @@ def Eat():
                 print('You now have {0} Dollars '.format(money))
                 wanted = float(wanted) + (1) 
                 print('Your wanted level is now {0}'.format(wanted))
-        
+        elif int(user_input) == 4:
+            print ("Heres the deal I can sell you a Gun or Hack the wanted list.")
+            print ("Type 1 to buy a gun for 500$")
+            user_input = input ("Type 2 to hack for 100$")
+            if int(user_input) == 1:
+                if money > 500:
+                    print ("Here take it now run off before the cops come")
+                    gun = 1
+                    money = float(money) - (500)
+            if int(user_input) == 2:
+                if money > 100:
+                    print ("Here im done now run off before the cops come")
+                    wanted = 0
+                    money = float(money) - (100)
+
+                
         print ("Type 1 to order")
         user_input = input ("Type 2 for main menu")
         if int(user_input) == 1 and (money) > 1:
@@ -158,7 +167,10 @@ def items():
     global thirst
     global foods
     global drinks
+    global gun
     print('You have a wallet (${0})  '.format(money))
+    if int(gun) > 0:
+        print('You have a gun')
     if int(foods) > 0: 
         print('You have {0} hamburgers type 1 to eat hamburger'.format(foods))
     if int(drinks) > 0:
@@ -185,13 +197,20 @@ def menu():
     global hunger
     global thirst
     global money
+    global gun
     now = datetime.datetime.now()
     timer2 = ('{0}{1}'.format(now.hour, now.minute))
     if (0) > (hunger) or (0) > (thirst):
         dead()
     if (wanted) > (9):
-        money = float(thirst) - (50)
-        wanted = 0
+        if gun == 1:
+            wanted = 9
+            print ("You shot the cops but you are not off their radar")
+            
+        else:
+            money = float(thirst) - float(money) * .5
+            wanted = 0
+            print ("You got caught by the cops")
     if (timer2) > (timer):
         thirst = float(thirst) - (1)
         hunger = float(hunger) - (1)
@@ -229,10 +248,6 @@ menu()
 
 
 
-
-        
-
-        
 
 
 
