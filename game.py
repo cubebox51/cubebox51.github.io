@@ -11,7 +11,7 @@ import pickle
 user_input = input ("Would you like to continue your save? (1=Yes) (2=No)")
 if int(user_input) == 1:
     with open('objs.pickle', "rb") as f:  
-        money, hunger, thirst, energy, gun, wanted, timer, drinks, foods = pickle.load(f)
+        money, hunger, thirst, energy, gun, wanted, timer, drinks, foods, salary = pickle.load(f)
         
 else:
     timer2 = 0
@@ -26,6 +26,7 @@ else:
     drink = 1
     wanted = 0
     gun = 0
+    salary = 1
     print ("Chapter 1")
     print ("The Big City")
     time.sleep(1)
@@ -156,9 +157,9 @@ def Eat():
     
 
 def work():
-    global gain
     global money
     global energy
+    global salary
     gain = 1
     from random import randint
     work1 = (randint(1,20))
@@ -169,9 +170,12 @@ def work():
     work2 = input('How much money did bob make')
     print (" ")
     if int(work2) == int(answer):
+        if hours == 1:
+            salary = float(salary) + (1)
+            print ("You got a promotion!(1+ Salary)")    
         print (" ")
-        print ("you gained 1 Dollars")
-        money = float(money) + float(gain)
+        print ("you gained {0} Dollars".format(salary))
+        money = float(money) + float(salary)
         print('You now have {0} Dollars '.format(money))
         print("Type 1 to work again") 
         user_input = input ("Type 2 to go to main menu")
@@ -190,7 +194,7 @@ def work():
             print("Type 1 to work again") 
             user_input = input ("Type 2 to go to main menu")
             print (" ")
-            energy = float(energy) - float(gain)
+            energy = float(energy) - (1)
             if int(user_input) == 1:
                 work()
             if int(user_input) == 2:
@@ -201,7 +205,7 @@ def work():
             print("Type 1 to work again") 
             user_input = input ("Type 2 to go to main menu")
             print (" ")
-            energy = float(energy) - float(gain)
+            energy = float(energy) - (1)
             if int(user_input) == 1:
                 work()
             if int(user_input) == 2:
@@ -301,7 +305,7 @@ def menu():
         menu()
     elif int(user_input) == 4:
         with open('objs.pickle', 'wb') as f:  
-            pickle.dump([money, hunger, thirst, energy, gun, wanted, timer, drinks, foods], f)
+            pickle.dump([money, hunger, thirst, energy, gun, wanted, timer, drinks, foods, salary], f)
 
 
 
@@ -317,6 +321,10 @@ menu()
 
 
         
+
+
+
+
 
 
 
