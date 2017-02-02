@@ -7,10 +7,13 @@
 import datetime
 import time
 from random import randint
-if start == 1:
-    cheese = 1
+import pickle
+user_input = input ("Would you like to continue your save? (1=Yes) (2=No)")
+if int(user_input) == 1:
+    with open('objs.pickle', "rb") as f:  
+        money, hunger, thirst, energy, gun, wanted, timer, drinks, foods = pickle.load(f)
+        
 else:
-    start = 1
     timer2 = 0
     now = datetime.datetime.now()
     timer = ('{0}{1}'.format(now.hour, now.minute))
@@ -20,100 +23,128 @@ else:
     drinks = 0
     foods = 0
     money = 0
-    plan = 150
     drink = 1
-    food = 1.25
     wanted = 0
     gun = 0
-
-print ("Chapter 1")
-print ("The Big City")
-time.sleep(1)
-print ("You lost your brother recently and are very sad about it but something about his death bugs you the doctors told you that he died of a heart attack but you dont belive this and think he was murdered he used to write in a diary and he would keep it with him whenever he went to Mcdonalds You decide to move to the Big City")
+    print ("Chapter 1")
+    print ("The Big City")
+    time.sleep(1)
+    print ("You lost your brother recently and are very sad about it but something about his death bugs you the doctors told you that he died of a heart attack but you dont belive this and think he was murdered he used to write in a diary and he would keep it with him whenever he went to Mcdonalds You decide to move to the Big City")
 def Eat():
+    food = 1.25
     try:
-        global money    
-        global plan
-        global drink
-        global food
-        global drinks
-        global foods
-        global wanted
-        global gun
+        global money, plan, drink, drinks, foods, wanted, gun
+        print (" ")
         print (" Hello welcome to Mcdonald's how may I help you")
         print ("\r Type 1 for food")
         print ("\r Type 2 for drinks")
         print ("\r Type 3 for money")
         user_input = input ("\r Type 4 to walk over to the shady guy")
+        print (" ")
         if int(user_input) == 1:
+            print (" ")
             print (" We have Hamburgers, fries, and cancer")
             print ("\r Type 1 for hamburgers")
             print ("\r Type 2 for fries")
             user_input = input ("\r Type 3 cancer")
+            print (" ")
             if int(user_input) == 1:
+                print (" ")
                 print (" That will cost you $1.25")
                 print ("\r Type 1 to pay")
                 user_input = input ("Type 2 to steal")
+                print (" ")
                 if int(user_input) == 1:
+                    print (" ")
                     print ("Thank you for comming")
                     money = float(money) - float(food)
                     print('You now have {0} Dollars '.format(money))
+                    print (" ")
                 foods = float(foods) + (1)
                 if int(user_input) == 2:
+                    print (" ")
                     print ("HEY COME BACK AND PAY!")
                     wanted = float(wanted) + (1) 
                     print('Your wanted level is now {0}'.format(wanted))
+                    print (" ")
             elif int(user_input) == 2:
+                print (" ")
                 print ("Potato!")
+                print (" ")
             elif int(user_input) == 3:
+                print (" ")
                 print ("Sorry we are out of cancer")
+                print (" ")
         elif int(user_input) == 2:
+            print (" ")
             print ("We have Coke, and Pepsi")
             print ("Type 1 for Coke")
             user_input = input ("Type 2 for Pepsi")
+            print (" ")
             if int(user_input) == 1:
+                print (" ")
                 print ("COKE SUCKS NO DRINKS FOR YOU!!!!!")
-            elif int(user_input) == 2: 
+                print (" ")
+            elif int(user_input) == 2:
+                print (" ")
                 print ("Nice I LOVE Pepsi Coke sucks that will cost you $1.00")
                 print ("Type 1 to pay")
                 user_input = input ("Type 2 to steal")
+                print (" ")
                 if int(user_input) == 1:
+                    print (" ")
                     print ("Thank you for comming")
+                    print (" ")
                     money = float(money) - float(drink)
+                    print (" ")
                     print('You now have {0} Dollars '.format(money))
+                    print (" ")
                 elif int(user_input) == 2:
+                    print (" ")
                     print ("HEY COME BACK AND PAY!")
                     wanted = float(wanted) + (1) 
                     print('Your wanted level is now {0}'.format(wanted))
+                    print (" ")
                 drinks = float(drinks) + (1)
         elif int(user_input) == 3:
+            print (" ")
             print ("So heres the plan you take the register ill destract the others.")
             user_input = input ("Type 1 to do the plan")
+            print (" ")
             if int(user_input) == 1:
                 plan = (randint(1,20))
                 money = float(money) + float(plan)
+                print (" ")
                 print('You got {0} Dollars for doing the plan'.format(plan))
                 print('You now have {0} Dollars '.format(money))
                 wanted = float(wanted) + (1) 
                 print('Your wanted level is now {0}'.format(wanted))
+                print (" ")
         elif int(user_input) == 4:
+            print (" ")
             print ("Heres the deal I can sell you a Gun or Hack the wanted list.")
             print ("Type 1 to buy a gun for 500$")
             user_input = input ("Type 2 to hack for 100$")
+            print (" ")
             if int(user_input) == 1:
                 if money > 500:
+                    print (" ")
                     print ("Here take it now run off before the cops come")
+                    print (" ")
                     gun = 1
                     money = float(money) - (500)
             if int(user_input) == 2:
                 if money > 100:
+                    print (" ")
                     print ("Here im done now run off before the cops come")
+                    print (" ")
                     wanted = 0
                     money = float(money) - (100)
 
-                
+        print (" ")        
         print ("Type 1 to order")
         user_input = input ("Type 2 for main menu")
+        print (" ")
         if int(user_input) == 1 and (money) > 1:
             Eat()
         elif int(user_input) == 2:
@@ -133,35 +164,43 @@ def work():
     work1 = (randint(1,20))
     hours = (randint(1,8))
     answer = float(work1) * float(hours)
+    print (" ")
     print('Bob worked {0} hours and got {1} dollars per hour '.format(hours,work1))
     work2 = input('How much money did bob make')
+    print (" ")
     if int(work2) == int(answer):
+        print (" ")
         print ("you gained 1 Dollars")
         money = float(money) + float(gain)
         print('You now have {0} Dollars '.format(money))
         print("Type 1 to work again") 
         user_input = input ("Type 2 to go to main menu")
+        print (" ")
         energy = float(energy) - float(gain)
         if int(user_input) == 1:
             work()
         if int(user_input) == 2:
             menu()
     else:
+        print (" ")
         print ("You lost 1 Dollar")
         if money > 0:
             money = float(money) - float(gain)
             print('You now have {0} Dollars '.format(money))
             print("Type 1 to work again") 
             user_input = input ("Type 2 to go to main menu")
+            print (" ")
             energy = float(energy) - float(gain)
             if int(user_input) == 1:
                 work()
             if int(user_input) == 2:
                 menu()
         else:
+            print (" ")
             print('You now have {0} Dollars '.format(money))
             print("Type 1 to work again") 
             user_input = input ("Type 2 to go to main menu")
+            print (" ")
             energy = float(energy) - float(gain)
             if int(user_input) == 1:
                 work()
@@ -177,6 +216,7 @@ def items():
     global foods
     global drinks
     global gun
+    print (" ")
     print('You have a wallet (${0})  '.format(money))
     if int(gun) > 0:
         print('You have a gun')
@@ -195,6 +235,7 @@ def items():
         drinks = float(drinks) - (1)
     if int(user_input) == 3:
         menu()
+    print (" ")
     menu()
 def dead():
     input("gg dude you ded")
@@ -207,33 +248,48 @@ def menu():
     global thirst
     global money
     global gun
+    global energy
     now = datetime.datetime.now()
     timer2 = ('{0}{1}'.format(now.hour, now.minute))
-    if (0) > (hunger) or (0) > (thirst):
+    if int(hunger) > (10):
+        hunger = 10
+    if int(thirst) > (10):
+        thirst = 10
+    if int(energy) > (10):
+        energy = 10
+    
+    if (0) > int(hunger) or (0) > int(thirst):
         dead()
     if (wanted) > (9):
         if gun == 1:
             wanted = 9
+            energy = float(energy) - (1)
+            print (" ")
             print ("You shot the cops but you are not off their radar")
-            
+            print (" ")
         else:
-            money = float(thirst) - float(money) * .5
+            money = float(money) * (0.5)
             wanted = 0
+            print (" ")
             print ("You got caught by the cops")
+            print (" ")
     if (timer2) > (timer):
         thirst = float(thirst) - (1)
         hunger = float(hunger) - (1)
         timer = float(timer) + (1)
         timer = ('{0}{1}'.format(now.hour, now.minute))
         menu()
+    print (" ")
     print ("Type 1 to Work")
     print ("Type 2 to go to Mcdonalds")
     print ("Type 3 to see your inventory")
+    print ("Type 4 to save your progress")
     print('You have {0} / 10 hunger'.format(hunger))
     print('You have {0} / 10 thirst'.format(thirst))
     print('You have {0} / 10 energy'.format(energy))
     print('You have {0} / 10 wanted'.format(wanted))
     user_input = input('You have {0} dollars '.format(money))
+    print (" ")
     if int(user_input) == 1:
         work()
     elif int(user_input) == 2 and (money) > 1:
@@ -243,10 +299,19 @@ def menu():
     elif int(user_input) == 795535:
         money = float(money) + (1000)
         menu()
+    elif int(user_input) == 4:
+        with open('objs.pickle', 'wb') as f:  
+            pickle.dump([money, hunger, thirst, energy, gun, wanted, timer, drinks, foods], f)
 
+
+
+
+            
     
     else:
+        print (" ")
         print ("You need more money")
+        print (" ")
         menu()
 menu()
 
