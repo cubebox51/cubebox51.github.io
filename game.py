@@ -11,7 +11,7 @@ import pickle
 user_input = input ("Would you like to continue your save? (1=Yes) (2=No)")
 if int(user_input) == 1:
     with open('objs.pickle', "rb") as f:  
-        money, hunger, thirst, energy, gun, wanted, timer, drinks, foods, salary = pickle.load(f)
+        money, hunger, thirst, energy, gun, wanted, timer, drinks, foods, salary, house, machine,moneymachine, collect = pickle.load(f)
         
 else:
     timer2 = 0
@@ -27,6 +27,10 @@ else:
     wanted = 0
     gun = 0
     salary = 1
+    house = 0
+    machine = ("|          |")
+    moneymachine = 0
+    collect = 0
     print ("Chapter 1")
     print ("The Big City")
     time.sleep(1)
@@ -34,13 +38,14 @@ else:
 def Eat():
     food = 1.25
     try:
-        global money, plan, drink, drinks, foods, wanted, gun
+        global money, plan, drink, drinks, foods, wanted, gun, house, machine, moneymachine
         print (" ")
         print (" Hello welcome to Mcdonald's how may I help you")
         print ("\r Type 1 for food")
         print ("\r Type 2 for drinks")
         print ("\r Type 3 for money")
-        user_input = input ("\r Type 4 to walk over to the shady guy")
+        print ("Type 4 to walk over to the shady guy")
+        user_input = input ("\r Type 5 to walk over to the realtor")
         print (" ")
         if int(user_input) == 1:
             print (" ")
@@ -96,7 +101,7 @@ def Eat():
                     print (" ")
                     print ("Thank you for comming")
                     print (" ")
-                    money = float(money) - float(drink)
+                    money = float(money) - (1)
                     print (" ")
                     print('You now have {0} Dollars '.format(money))
                     print (" ")
@@ -141,7 +146,18 @@ def Eat():
                     print (" ")
                     wanted = 0
                     money = float(money) - (100)
-
+        elif int(user_input) == 5:
+            print (" ") 
+            print ("Type 1 to buy a house for 1000$") 
+            print ("Type 2 to buy a money machine for 100$")
+            user_input = input ("Type 3 to go back to main menu")
+            print (" ")
+            if int(user_input) == 1 and money > 999:
+                house = 1
+                money = float(money) - (1000)
+            if int(user_input) == 2 and money > 99:
+                moneymachine = float(moneymachine) + (1)
+                money = float(money) - (100)
         print (" ")        
         print ("Type 1 to order")
         user_input = input ("Type 2 for main menu")
@@ -243,9 +259,39 @@ def items():
     menu()
 def dead():
     input("gg dude you ded")
+def home():
+    global machine, moneymachine, collect, money
+    if moneymachine == 1:
+        machine = ("|$         |")
+    if moneymachine == 2:
+        machine = ("|$$        |")
+    if moneymachine == 3:
+        machine = ("|$$$       |")
+    if moneymachine == 4:
+        machine = ("|$$$$      |")
+    if moneymachine == 5:
+        machine = ("|$$$$$     |")
+        
     
+    print ("")
+    print ("   House")
+    print (" ----------")
+    print (machine)
+    print ("|          |")
+    print ("|          |")
+    print ("|          |")
+    print (" ----------")
+    print ("You have {0}/5 money machines".format(moneymachine))
+    print ("You have {0}$ to collect".format(collect))
+    user_input = input ("Type 1 to collect money")
+    print ("")
+    if int(user_input) == 1:
+        money = float(money) + float(collect)
+        collect = 0
+  
+    menu()
 def menu():
-    global wanted
+    global wanted, house, collect, moneymachine
     global now
     global timer
     global hunger
@@ -281,6 +327,7 @@ def menu():
         thirst = float(thirst) - (1)
         hunger = float(hunger) - (1)
         timer = float(timer) + (1)
+        collect = float(collect) + float(moneymachine) 
         timer = ('{0}{1}'.format(now.hour, now.minute))
         menu()
     print (" ")
@@ -288,6 +335,8 @@ def menu():
     print ("Type 2 to go to Mcdonalds")
     print ("Type 3 to see your inventory")
     print ("Type 4 to save your progress")
+    if house == 1:
+        print ("Type 5 to go to your house")
     print('You have {0} / 10 hunger'.format(hunger))
     print('You have {0} / 10 thirst'.format(thirst))
     print('You have {0} / 10 energy'.format(energy))
@@ -305,7 +354,9 @@ def menu():
         menu()
     elif int(user_input) == 4:
         with open('objs.pickle', 'wb') as f:  
-            pickle.dump([money, hunger, thirst, energy, gun, wanted, timer, drinks, foods, salary], f)
+            pickle.dump([money, hunger, thirst, energy, gun, wanted, timer, drinks, foods, salary, house, machine, moneymachine, collect], f)
+    elif int(user_input) == 5 and house == 1:
+        home()
 
 
 
@@ -318,6 +369,12 @@ def menu():
         print (" ")
         menu()
 menu()
+
+
+        
+
+
+
 
 
         
