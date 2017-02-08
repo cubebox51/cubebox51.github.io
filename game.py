@@ -290,6 +290,9 @@ def home():
     if int(collecter) == 0:
         print ("You have {0}$ to collect".format(collect))
         user_input = input ("Type 1 to collect money")
+    if int(collecter) == 1:
+        money = float(money) + float(collect)
+        collect = 0 
     print ("")
     if int(user_input) == 1:
         money = float(money) + float(collect)
@@ -356,7 +359,7 @@ def menu():
     elif int(user_input) == 3:
         items()
     elif int(user_input) == 795535:
-        money = float(money) + (1000)
+        money = float(money) + (10000)
         menu()
     elif int(user_input) == 4:
         with open('objs.pickle', 'wb') as f:  
@@ -384,14 +387,6 @@ menu()
 
 
         
-
-
-
-
-
-
-
-
 
 
 
