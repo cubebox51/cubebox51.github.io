@@ -11,7 +11,7 @@ import pickle
 user_input = input ("Would you like to continue your save? (1=Yes) (2=No)")
 if int(user_input) == 1:
     with open('objs.pickle', "rb") as f:  
-        money, hunger, thirst, energy, gun, wanted, timer, drinks, foods, salary, house, machine,moneymachine, collect, collecter = pickle.load(f)
+        money, hunger, thirst, energy, gun, wanted, timer, timer2, drinks, foods, salary, house, machine,moneymachine, collect, collecter = pickle.load(f)
         
 else:
     timer2 = 0
@@ -333,10 +333,11 @@ def menu():
             print ("You got caught by the cops")
             print (" ")
     if (timer2) > (timer):
+        collect = float(collect) + float(moneymachine) + float(timer2) - float(timer)
+    if (timer2) > (timer):
         thirst = float(thirst) - (1)
         hunger = float(hunger) - (1)
         timer = float(timer) + (1)
-        collect = float(collect) + float(moneymachine) 
         timer = ('{0}{1}'.format(now.hour, now.minute))
         menu()
     print (" ")
@@ -363,7 +364,7 @@ def menu():
         menu()
     elif int(user_input) == 4:
         with open('objs.pickle', 'wb') as f:  
-            pickle.dump([money, hunger, thirst, energy, gun, wanted, timer, drinks, foods, salary, house, machine, moneymachine, collect, collecter], f)
+            pickle.dump([money, hunger, thirst, energy, gun, wanted, timer, timer2, drinks, foods, salary, house, machine, moneymachine, collect, collecter], f)
     elif int(user_input) == 5 and house == 1:
         home()
 
