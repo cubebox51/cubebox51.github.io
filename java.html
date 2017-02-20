@@ -1,0 +1,144 @@
+html{
+  background-image: url("https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQoUPxKcJVwiqU7X60sAPTT_qz4YWQ9m1mafqPuOjDzMEcZH0D5dg");
+  }
+  <canvas id ="gameCanvas" width="800" height="600"> 
+</canvas>
+<script>
+var canvas;
+var canvasContext;
+var ballX = 390;
+var ballY = 290;
+var ballSpeedX = 5;
+var ballSpeedY = 5;
+var paddle1Y = 250
+var paddleHeight = 100
+var paddle2Y = 250
+var blue = 2
+
+
+
+window.onload = function () {
+	canvas = document.getElementById('gameCanvas');
+	canvasContext = canvas.getContext('2d');
+	var fps = 30;
+	setInterval(move, 1000/fps) 
+	setInterval(drawEverything, 1000/fps)
+	canvas.addEventListener('mousemove',
+	function(evt) {
+		var mousePos = MousePos(evt);
+		paddle1Y = mousePos.y - 50;
+});
+
+}
+function MousePos(evt) {
+	var rect = canvas.getBoundingClientRect();
+	var root = document.documentElement;
+	var mouseX = evt.clientX - rect.left - root.scrollLeft
+	var mouseY = evt.clientY - rect.top - root.scrollTop
+	return{
+		x:mouseX,
+		y:mouseY
+
+};
+}
+
+
+
+function drawEverything() {
+	canvasContext.fillStyle = 'black';
+	canvasContext.fillRect(0,0,canvas.width,canvas.height);
+
+	canvasContext.fillStyle = 'white';
+	canvasContext.beginPath();
+	canvasContext.arc(ballX,ballY,10,0,Math.PI*2,true);
+	canvasContext.fill();
+
+	canvasContext.fillStyle = 'red';
+	canvasContext.fillRect(0,paddle1Y,10,paddleHeight);
+
+	canvasContext.fillStyle = 'blue';
+	canvasContext.fillRect(790,paddle2Y,10,paddleHeight);
+
+}
+function resetball() {
+	ballX = 390;
+	ballY = 290;
+	ballSpeedX = 5;
+	ballSpeedY = 5;
+	paddle1Y = 250
+	paddle2Y = 250
+	blue = 2.5
+
+}
+
+function move() {
+	ballX = ballX + ballSpeedX
+	ballY = ballY + ballSpeedY
+	blue = blue + 0.02
+	if (ballSpeedX > 0) {
+		ballSpeedX = ballSpeedX + .02
+}
+	if (ballSpeedX < 0) {
+		ballSpeedX = ballSpeedX - .02
+}
+	if (ballSpeedY > 0) {
+		ballSpeedY = ballSpeedY + .03
+}
+	if (ballSpeedY < 0) {
+		ballSpeedY = ballSpeedY - .03
+}
+	if (ballY > paddle2Y + 50) {
+		paddle2Y = paddle2Y + blue
+}
+	if (ballY < paddle2Y + 50) {
+		paddle2Y = paddle2Y - blue
+}
+
+	
+	if (ballX <= 20) {
+		if (ballY > paddle1Y && ballY < paddle1Y+paddleHeight) {
+		if (ballY > paddle1Y+paddleHeight-40) {
+			ballSpeedX = -ballSpeedX 
+			console.log("Red Hit Up")
+}
+		else {
+			ballSpeedX = -ballSpeedX 
+			ballSpeedY = -ballSpeedY
+			console.log("Red Hit Down")			
+}
+}
+
+		else {
+			resetball()
+			console.log("Red Miss")
+}
+}
+	if (ballX > 780) {
+		if (ballY > paddle2Y && ballY < paddle2Y+paddleHeight) {
+			ballSpeedX = -ballSpeedX 
+			ballSpeedY = -ballSpeedY 
+			console.log("Blue Hit")
+ 
+}
+		else {
+			resetball()
+			console.log("Blue Miss")
+
+}
+}
+	if (ballY < 10) {
+
+		ballSpeedY = -ballSpeedY
+		console.log("Ball hit roof")
+}
+	if (ballY > 590) {
+
+		ballSpeedY = -ballSpeedY
+		console.log("ball hit floor")
+}
+}
+
+
+
+
+ </script>
