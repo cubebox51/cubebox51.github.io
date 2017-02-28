@@ -1,4 +1,463 @@
-<!DOCTYPE html>
-<p> Welcome, Darren Wong, begin making your game as soon as possible you idiot, we're already in second term!
-- Darren Wong<p>
- 
+<canvas id ="gameCanvas" width="800" height="600"> 
+</canvas>
+<script>
+document.onkeydown = checkKey;
+var rightkey = 0
+var leftkey = 0
+var left1 = 1
+var right1 = 0
+var headX = 400
+var headY = 300
+var headmoveX = 1
+var headmoveY = 0
+var tail1X = 375
+var tail1Y = 300
+var tail2X = 350
+var tail2Y = 300
+var tail3X = 325
+var tail3Y = 300
+var tail4X = 300
+var tail4Y = 300
+var canvas;
+var canvasContext;
+window.onload = function () {
+canvas = document.getElementById('gameCanvas');
+canvasContext = canvas.getContext('2d');
+	var fps = 100;
+setInterval(function() { move(); draw(); move2(); }, 1000/fps);
+}
+
+
+
+function checkKey(e) {
+
+    e = e || window.event;
+    if (e.keyCode == '37' && leftkey == 0) {
+       // left arrow
+	left()
+	console.log("left")
+	right1 = 0
+	left1 = 1
+
+}
+
+    else if (e.keyCode == '39' && rightkey == 0) {
+       // right arrow
+	right()
+	console.log("right")
+	left1 = 0
+	right1 = 1
+
+    
+}
+
+}
+function draw() {
+canvasContext.fillStyle = 'black';
+canvasContext.fillRect(0,0,canvas.width,canvas.height);
+
+canvasContext.fillStyle = 'red';
+canvasContext.fillRect(headX,headY,20,20);
+
+canvasContext.fillStyle = 'blue';
+canvasContext.fillRect(tail1X,tail1Y,20,20);
+
+canvasContext.fillStyle = 'green';
+canvasContext.fillRect(tail2X,tail2Y,20,20);
+
+canvasContext.fillStyle = 'yellow';
+canvasContext.fillRect(tail3X,tail3Y,20,20);
+
+
+}
+function move2() {
+if (right1 == 1) {
+if (headmoveX < 0 && headmoveY == 0) {
+	headX = headX + 1
+	setTimeout(function(){
+		if (tail1Y == headY) {
+			tail1X = tail1X + 1
+}
+		else {
+			tail1Y = tail1Y + 1
+			tail1X = tail1X + 1
+}
+}, 100);
+	setTimeout(function(){
+		if (tail2Y == headY) {
+			
+			tail2X = tail2X + 1
+}
+
+		else {
+			tail2Y = tail2Y + 1
+			tail2X = tail2X + 1
+}
+}, 200);
+	setTimeout(function(){
+		if (tail3Y == headY) {
+			
+			console.log("Alot")
+			tail3X = tail3X + 1
+}
+
+		else {
+			tail3Y = tail3Y + 1
+			tail3X = tail3X + 1
+}
+}, 300);
+}
+
+
+
+
+if (headmoveY < 0 && headmoveX == 0) {
+	headY = headY + 1
+	setTimeout(function(){
+		if (tail1X == headX) {
+			tail1Y = tail1Y + 1
+}
+		else {
+			tail1X = tail1X - 1
+			tail1Y = tail1Y + 1
+}
+}, 100);
+	setTimeout(function(){
+		if (tail2X == headX) {
+			tail2Y = tail2Y + 1
+}
+		else {
+			tail2X = tail2X - 1
+			tail2Y = tail2Y + 1
+}
+}, 200);
+	setTimeout(function(){
+		if (tail3X == headX) {
+			tail3Y = tail3Y + 1
+}
+		else {
+			tail3X = tail3X - 1
+			tail3Y = tail3Y + 1
+}
+}, 300);
+}
+
+
+
+if (headmoveX > 0 && headmoveY == 0) {
+	headX = headX - 1
+	setTimeout(function(){
+		if (tail1Y == headY) {
+			tail1X = tail1X - 1
+}
+		else {
+			tail1Y = tail1Y - 1
+			tail1X = tail1X - 1
+}
+}, 100);
+setTimeout(function(){
+		if (tail2Y == headY) {
+			tail2X = tail2X - 1
+}
+		else {
+			tail2Y = tail2Y - 1
+			tail2X = tail2X - 1
+}
+}, 200);
+setTimeout(function(){
+		if (tail3Y == headY) {
+			tail3X = tail3X - 1
+}
+		else {
+			tail3Y = tail3Y - 1
+			tail3X = tail3X - 1
+}
+}, 300);
+}
+
+
+
+
+if (headmoveY > 0 && headmoveX == 0) {
+	headY = headY + 1
+	setTimeout(function(){
+		if (tail1X == headX) {
+			tail1Y = tail1Y + 1
+}
+		else {
+			tail1X = tail1X + 1
+			tail1Y = tail1Y - 1
+}
+}, 100);
+setTimeout(function(){
+		if (tail2X == headX) {
+			tail2Y = tail2Y + 1
+}
+		else {
+			tail2X = tail2X + 1
+			tail2Y = tail2Y - 1
+}
+}, 200);
+setTimeout(function(){
+		if (tail3X == headX) {
+			tail3Y = tail3Y + 1
+}
+		else {
+			tail3X = tail3X + 1
+			tail3Y = tail3Y - 1
+}
+}, 300);
+
+}
+
+}
+}
+
+
+
+
+
+
+
+//DIFFERENT MOVE
+
+
+
+
+
+
+
+
+function move() {
+
+if (left1 == 1) {
+if (headmoveX > 0 && headmoveY == 0) {
+	headX = headX + 1
+	setTimeout(function(){
+		if (tail1Y == headY) {
+			tail1X = tail1X + 1
+}
+		else {
+			tail1Y = tail1Y + 1
+			tail1X = tail1X + 1
+}
+}, 100);
+	setTimeout(function(){
+		if (tail2Y == headY) {
+			
+			console.log("Alot")
+			tail2X = tail2X + 1
+}
+
+		else {
+			tail2Y = tail2Y + 1
+			tail2X = tail2X + 1
+}
+}, 200);
+	setTimeout(function(){
+		if (tail3Y == headY) {
+			
+			console.log("Alot")
+			tail3X = tail3X + 1
+}
+
+		else {
+			tail3Y = tail3Y + 1
+			tail3X = tail3X + 1
+}
+}, 300);
+}
+
+
+
+
+if (headmoveY > 0 && headmoveX == 0) {
+	headY = headY + 1
+	setTimeout(function(){
+		if (tail1X == headX) {
+			tail1Y = tail1Y + 1
+}
+		else {
+			tail1X = tail1X - 1
+			tail1Y = tail1Y + 1
+}
+}, 100);
+	setTimeout(function(){
+		if (tail2X == headX) {
+			tail2Y = tail2Y + 1
+}
+		else {
+			tail2X = tail2X - 1
+			tail2Y = tail2Y + 1
+}
+}, 200);
+	setTimeout(function(){
+		if (tail3X == headX) {
+			tail3Y = tail3Y + 1
+}
+		else {
+			tail3X = tail3X - 1
+			tail3Y = tail3Y + 1
+}
+}, 300);
+}
+
+
+
+if (headmoveX < 0 && headmoveY == 0) {
+	headX = headX - 1
+	setTimeout(function(){
+		if (tail1Y == headY) {
+			tail1X = tail1X - 1
+}
+		else {
+			tail1Y = tail1Y - 1
+			tail1X = tail1X - 1
+}
+}, 100);
+setTimeout(function(){
+		if (tail2Y == headY) {
+			tail2X = tail2X - 1
+}
+		else {
+			tail2Y = tail2Y - 1
+			tail2X = tail2X - 1
+}
+}, 200);
+setTimeout(function(){
+		if (tail3Y == headY) {
+			tail3X = tail3X - 1
+}
+		else {
+			tail3Y = tail3Y - 1
+			tail3X = tail3X - 1
+}
+}, 300);
+}
+
+
+
+
+if (headmoveY < 0 && headmoveX == 0) {
+	headY = headY - 1
+	setTimeout(function(){
+		if (tail1X == headX) {
+			tail1Y = tail1Y - 1
+}
+		else {
+			tail1X = tail1X + 1
+			tail1Y = tail1Y - 1
+}
+}, 100);
+setTimeout(function(){
+		if (tail2X == headX) {
+			tail2Y = tail2Y - 1
+}
+		else {
+			tail2X = tail2X + 1
+			tail2Y = tail2Y - 1
+}
+}, 200);
+setTimeout(function(){
+		if (tail3X == headX) {
+			tail3Y = tail3Y - 1
+}
+		else {
+			tail3X = tail3X + 1
+			tail3Y = tail3Y - 1
+}
+}, 300);
+
+}
+
+}
+}
+
+
+
+
+function left() {
+console.log("left2")
+var done2 = 0
+
+
+if (headmoveX < 0 && done2 == 0) {
+console.log("X < 0")
+headmoveX = 0
+headmoveY = 1
+done2 = 1
+}
+
+if (headmoveX > 0 && done2 == 0) {
+console.log("X > 0")
+headmoveX = 0
+headmoveY = -1
+done2 = 1
+}
+
+if (headmoveY < 0 && done2 == 0) {
+console.log("Y < 0")
+headmoveY = 0 
+headmoveX = -1
+
+done2 = 1
+}
+
+if (headmoveY > 0 && done2 == 0) {
+console.log("Y > 0")
+headmoveY = 0
+headmoveX = 1
+done2 = 1
+}
+
+leftkey = 0
+
+
+
+}
+
+function right() {
+console.log("right2")
+var done = 0
+
+if (headmoveX < 0 && done == 0) {
+console.log("X < 0")
+headmoveX = 0
+headmoveY = -1
+done = 1
+}
+
+if (headmoveX > 0 && done == 0) {
+console.log("X > 0")
+headmoveX = 0
+headmoveY = 1
+done = 1
+}
+
+if (headmoveY < 0 && done == 0) {
+console.log("Y < 0")
+headmoveX = 1
+headmoveY = 0 
+done = 1
+}
+
+if (headmoveY > 0 && done == 0) {
+console.log("Y > 0")
+headmoveX = -1
+headmoveY = 0
+done = 1
+}
+
+rightkey = 0
+
+
+}
+
+
+
+
+
+
+</script>
+
+
