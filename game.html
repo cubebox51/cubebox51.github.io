@@ -24,19 +24,91 @@ var tail2Y = 300
 var tail3X = 340
 var tail3Y = 300
 
-var tail4X = 440
+var tail4X = 360
 var tail4Y = 300
+
+var tail5X = 360
+var tail5Y = 300
+
+var tail5X = 360
+var tail5Y = 300
+
+var tail6X = 360
+var tail6Y = 300
+
+var tail7X = 340
+var tail7Y = 300
+
+var tail8X = 340
+var tail8Y = 300
+var stop = 0
 var appleX = Math.floor(Math.random() * 39) * 20
 var appleY = Math.floor(Math.random() * 29) * 20
 var score = 0
+var random1 = Math.floor(Math.random() * 40) * 2
+var random2 = Math.floor(Math.random() * 40) * 2
 var canvas;
 var canvasContext;
+confirm ("You must answer one question to play")
+var answer = prompt ("what is " + random1 + " x " + random2 + " ?")
+math()
+
+function math() {
+if (answer == random1 * random2) {
+confirm ("Correct you may now play 1 game.")
+}
+else {
+confirm ("Wrong.")
+random1 = Math.floor(Math.random() * 40) * 2
+random2 = Math.floor(Math.random() * 40) * 2
+answer = prompt ("what is " + random1 + " x " + random2 + " ?")
+math()
+}
+}
+
+//End Of Function
 
 window.onload = function () {
 canvas = document.getElementById('gameCanvas');
 canvasContext = canvas.getContext('2d');
 	var fps = 7;
-setInterval(function() { move(); draw(); apple(); }, 1000/fps);
+	if (stop == 0) {
+setInterval(function() { move(); draw(); apple(); walls();}, 1000/fps);
+setInterval(function() { ded();}, 10000/fps);
+}
+}
+
+//End Of Function
+
+function walls() {
+if (headX < 0 || headX > 800 || headY < 0 || headY > 600 && stop == 0) {
+stop = 1
+}
+if (headX == tail1X && headY == tail1Y && score > 0) {
+stop = 1
+}
+if (headX == tail2X && headY == tail2Y && score > 1) {
+stop = 1
+}
+if (headX == tail3X && headY == tail3Y && score > 2) {
+stop = 1
+}
+if (headX == tail4X && headY == tail4Y && score > 3) {
+stop = 1
+}
+
+
+}
+
+//End Of Function
+
+function ded() {
+if (stop == 1) {
+stop = 0
+confirm ("You lost. Refresh the website to play again (Press F5)")
+headX = 340
+headY = 3000000000000000
+}
 }
 
 //End Of Function
@@ -120,9 +192,27 @@ canvasContext.fillRect(tail2X,tail2Y,20,20);
 }
 
 if (score > 2) {
-canvasContext.fillStyle = 'yellow';
+canvasContext.fillStyle = 'blue';
 canvasContext.fillRect(tail3X,tail3Y,20,20);
 }
+
+if (score > 3) {
+canvasContext.fillStyle = 'green';
+canvasContext.fillRect(tail4X,tail4Y,20,20);
+}
+
+if (score > 4) {
+canvasContext.fillStyle = 'blue';
+canvasContext.fillRect(tail5X,tail5Y,20,20);
+}
+
+if (score > 5) {
+canvasContext.fillStyle = 'green';
+canvasContext.fillRect(tail6X,tail6Y,20,20);
+}
+
+canvasContext.font = ('20px Arial');
+canvasContext.fillText("Score: " + score,20,30);
 
 canvasContext.fillStyle = 'gray';
 canvasContext.fillRect(appleX,appleY,20,20);
@@ -176,6 +266,26 @@ if (left1 == 1) {
 	tail4X = tail4X - 20
 	}
 }, 400);
+	setTimeout(function(){
+	if (tail5Y > tail4Y) {
+	tail5Y = tail5Y - 20
+	}
+	else if (tail5Y < tail4Y)
+	tail5Y = tail5Y + 20
+	else {
+	tail5X = tail5X - 20
+	}
+}, 500);
+	setTimeout(function(){
+	if (tail6Y > tail5Y) {
+	tail6Y = tail6Y - 20
+	}
+	else if (tail6Y < tail5Y)
+	tail6Y = tail6Y + 20
+	else {
+	tail6X = tail6X - 20
+	}
+}, 600);
 }
 
 
@@ -213,6 +323,36 @@ if (right1 == 1) {
 	tail3X = tail3X + 20
 	}
 }, 300);
+	setTimeout(function(){
+	if (tail4Y > tail3Y) {
+	tail4Y = tail4Y - 20
+	}
+	else if (tail4Y < tail3Y)
+	tail4Y = tail4Y + 20
+	else {
+	tail4X = tail4X + 20
+	}
+}, 400);
+	setTimeout(function(){
+	if (tail5Y > tail4Y) {
+	tail5Y = tail5Y - 20
+	}
+	else if (tail5Y < tail4Y)
+	tail5Y = tail5Y + 20
+	else {
+	tail5X = tail5X + 20
+	}
+}, 500);
+	setTimeout(function(){
+	if (tail6Y > tail5Y) {
+	tail6Y = tail6Y - 20
+	}
+	else if (tail6Y < tail5Y)
+	tail6Y = tail6Y + 20
+	else {
+	tail6X = tail6X + 20
+	}
+}, 600);
 }
 
 
@@ -249,6 +389,36 @@ setTimeout(function(){
 	tail3Y = tail3Y - 20
 	}
 }, 300);
+setTimeout(function(){
+	if (tail4X > tail3X) {
+	tail4X = tail4X - 20
+	}
+	else if (tail4X < tail3X)
+	tail4X = tail4X + 20
+	else {
+	tail4Y = tail4Y - 20
+	}
+}, 400);
+setTimeout(function(){
+	if (tail5X > tail4X) {
+	tail5X = tail5X - 20
+	}
+	else if (tail5X < tail4X)
+	tail5X = tail5X + 20
+	else {
+	tail5Y = tail5Y - 20
+	}
+}, 500);
+setTimeout(function(){
+	if (tail6X > tail5X) {
+	tail6X = tail6X - 20
+	}
+	else if (tail6X < tail5X)
+	tail6X = tail6X + 20
+	else {
+	tail6Y = tail6Y - 20
+	}
+}, 500);
 }
 
 
@@ -286,11 +456,42 @@ if (down1 == 1) {
 	tail3Y = tail3Y + 20
 	}
 	}, 300);
+	setTimeout(function(){
+	if (tail4X > tail3X) {
+	tail4X = tail4X - 20
+	}
+	else if (tail4X < tail3X)
+	tail4X = tail4X + 20
+	else {
+	tail4Y = tail4Y + 20
+	}
+	}, 400);
+	setTimeout(function(){
+	if (tail5X > tail4X) {
+	tail5X = tail5X - 20
+	}
+	else if (tail5X < tail4X)
+	tail5X = tail5X + 20
+	else {
+	tail5Y = tail5Y + 20
+	}
+	}, 500);
+	setTimeout(function(){
+	if (tail6X > tail5X) {
+	tail6X = tail6X - 20
+	}
+	else if (tail6X < tail5X)
+	tail6X = tail6X + 20
+	else {
+	tail6Y = tail6Y + 20
+	}
+	}, 500);
 
 }
 
 }
 
+//End Of Function
 
 </script>
 
