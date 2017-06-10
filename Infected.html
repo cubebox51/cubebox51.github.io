@@ -27,6 +27,9 @@ var canvas;
 var canvasContext;
 var Key1
 var Key2
+var Key3
+var Key4
+var Key5
 var mucushp = 100
 var hit = false
 var heart = 5
@@ -36,6 +39,66 @@ var virus = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw8PDxUP
 
 
 
+
+function options() {
+	draw()
+
+
+	canvasContext.fillStyle = 'black';
+	canvasContext.font = ('30px Arial');
+	canvasContext.fillText("Mucus",350,230);
+	
+	canvasContext.fillStyle = 'black';
+	canvasContext.font = ('12px Arial');
+	canvasContext.fillText("(Type 1)",355,250);
+	
+	canvasContext.fillStyle = 'blue';
+	canvasContext.fillRect(305,350,150,60);
+	
+	canvasContext.fillStyle = 'black';
+	canvasContext.font = ('30px Arial');
+	canvasContext.fillText("Throat",330,380);
+	
+	canvasContext.fillStyle = 'black';
+	canvasContext.font = ('12px Arial');
+	canvasContext.fillText("(Type 2)",355,400);
+	
+	if (Key1 === true) {
+	Key1 = false
+		mucus()
+	}else if (Key2 === true) {
+	Key2 = false
+		throat()
+	}else if (Key3 === true) {
+		Key3 = false
+		cell()
+	}else if (Key4 === true) {
+		Key4 = false
+		
+	}else if (Key5 === true) {
+		Key5 = false
+		
+	}else {
+		window.setTimeout(options, 100);
+	}
+	
+
+}
+
+//################################\\
+//New Function
+//################################// 
+
+function cell() {
+	alert("hi")
+	draw()
+	canvasContext.fillStyle = 'black';
+	canvasContext.fillRect(410,455,5,20);
+
+
+
+
+}
 
 //################################\\
 //New Function
@@ -233,7 +296,7 @@ function throat(){
 
 	if (Key1 === true) {
 	Key1 = false
-	
+	cell()
 } else {
 	window.setTimeout(throat, 100);
 }
@@ -519,8 +582,7 @@ if (Key1 === true) {
 	dialog1()
 } else if (Key2 === true) {
 	Key2 = false
-	alert("Not done, Sorry")
-	Start()
+	options()
 } else {
 	window.setTimeout(Start, 100);
 }
@@ -565,6 +627,18 @@ function draw() {
 	// number 2 key
 	if (code == 50){
 		Key2 = true
+	}
+	// number 3 key
+	if (code == 51){
+		Key3 = true
+	}
+	// number 4 key
+	if (code == 52){
+		Key4 = true
+	}
+	// number 5 key
+	if (code == 53){
+		Key5 = true
 	}
  }
  //################################\\
