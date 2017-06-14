@@ -56,36 +56,485 @@ var start = false
 var time = 11
 var bloodhp = 200
 var turn3 = false
+var immunehp = 1000
+var question = true
+var question1 = true
+var questions2 = true
+var randy
+
 var virus = 'data:image/jpeg;base64,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'
 
-function lungs () {
-alert("not done :(")
+
+function question3() {
+draw()
+	
+	if (questions2 === true) {
+	randy = Math.floor(Math.random() * 11);
+	questions2 = false
+	}
+	if (randy === 0) {
+		canvasContext.fillStyle = 'black';
+		canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What is a helper T-cell and its function.",12,100);
+		canvasContext.font = ('20px Arial');
+		canvasContext.fillText("(Press 1)A T-cell that controls the activity of other cells of the immune system.",20,200);
+		canvasContext.fillText("(Press 2)A T-cell that only activates B-cells.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		hit = true
+		questions2 = true
+		immune()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		heart = heart - 1
+		questions2 = true
+		immune()
+	
+} else {
+	window.setTimeout(question3, 100);
+}
+		
+	}else if (randy === 1) {
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What is an infectious disease?",12,100);
+		canvasContext.font = ('20px Arial');
+		canvasContext.fillText("(Press 1)A disease that can be transfered from one person to another.",20,200);
+		canvasContext.fillText("(Press 2)A disease that can only be transfered through indirect contact and direct contact.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		hit = true
+		questions2 = true
+		immune()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		heart = heart - 1
+		questions2 = true
+		immune()
+	
+} else {
+	window.setTimeout(question3, 100);
+}
+	}else if (randy === 2) {
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What is a B-cell and its function?",12,100);
+		canvasContext.font = ('20px Arial');
+		canvasContext.fillText("(Press 1)A cell that is resposible for producing antibodies.",20,200);
+		canvasContext.fillText("(Press 2)A cell that is responsible for producing antigens.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		hit = true
+		questions2 = true
+		immune()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		heart = heart - 1
+		questions2 = true
+		immune()
+	
+} else {
+	window.setTimeout(question3, 100);
+}
+	}else if (randy === 3) {
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What is a killer T-cell and its function?",12,100);
+		canvasContext.font = ('20px Arial');
+		canvasContext.fillText("(Press 1)A cell that kills cancer cells by itself.",20,200);
+		canvasContext.fillText("(Press 2)A cell that can kill HIV viruses by itself.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		hit = true
+		questions2 = true
+		immune()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		heart = heart - 1
+		questions2 = true
+		immune()
+	
+} else {
+	window.setTimeout(question3, 100);
+}
+	}else if (randy === 4) {
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What is a memory B-cell and its function?",12,100);
+		canvasContext.font = ('20px Arial');
+		canvasContext.fillText("(Press 1) A cell that provides immunity because of certain antibodies for certain viruses.",20,200);
+		canvasContext.fillText("(Press 2)An antibody factory that produces antibodies for certain viruses.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		hit = true
+		questions2 = true
+		immune()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		heart = heart - 1
+		questions2 = true
+		immune()
+	
+} else {
+	window.setTimeout(question3, 100);
+}
+	}else if (randy === 5) {
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What is a plasma cell and its function?",12,100);
+		canvasContext.font = ('20px Arial');
+		canvasContext.fillText("(Press 1)A B-cell that produces a single type of antibody.",20,200);
+		canvasContext.fillText("(Press 2)A B-cell that provides immunity.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		hit = true
+		questions2 = true
+		immune()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		heart = heart - 1
+		questions2 = true
+		immune()
+	
+} else {
+	window.setTimeout(question3, 100);
+}
+	}else if (randy === 6) {
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What is a dendritic cell and its function?",12,100);
+		canvasContext.font = ('20px Arial');
+		canvasContext.fillText("(Press 1)To reveal antigens and pathogens.",20,200);
+		canvasContext.fillText("(Press 2)The main function is to process antigen material and present it on the cell surface to the helper T-cells.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		heart = heart - 1
+		questions2 = true
+		immune()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		hit = true
+		questions2 = true
+		immune()
+	
+} else {
+	window.setTimeout(question3, 100);
+}
+	}else if (randy === 7) {
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What are three ways bacteria can be helpful?",12,100);
+		canvasContext.font = ('20px Arial');
+		canvasContext.fillText("(Press 1)Making cheese, yoghurt, and probiotics.",20,200);
+		canvasContext.fillText("(Press 2)Compost, Digestion, and recycling nutrients.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		heart = heart - 1
+		questions2 = true
+		immune()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		hit = true
+		questions2 = true
+		immune()
+	
+} else {
+	window.setTimeout(question3, 100);
+}
+}else if (randy === 8) {
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What are phagocytes?",12,100);
+		canvasContext.font = ('20px Arial');
+		canvasContext.fillText("(Press 1)A type of T-cell that is capable of engulfing viruses and bacteria.",20,200);
+		canvasContext.fillText("(Press 2)A type of white blood cell that is capable of engulfing viruses and bacteria.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		heart = heart - 1
+		questions2 = true
+		immune()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		hit = true
+		questions2 = true
+		immune()
+	
+} else {
+	window.setTimeout(question3, 100);
+}
+
+}else if (randy === 9){
+
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What is immunity?",12,100);
+		canvasContext.font = ('20px Arial');
+		canvasContext.fillText("(Press 1)The ability of an organism to resist a particular infection by the action of specific antibodies.",20,200);
+		canvasContext.fillText("(Press 2)The ability of the helper T-cell to resist a particulr infection by the action of specific antibodies.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		heart = heart - 1
+		questions2 = true
+		immune()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		hit = true
+		questions2 = true
+		immune()
+	
+} else {
+	window.setTimeout(question3, 100);
+}
+
+}else if (randy === 10) {
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What are the differences between a eukaryotic cell and a prokaryotic cell?",12,100);
+		canvasContext.font = ('20px Arial');
+		canvasContext.fillText("(Press 1)An prokaryotic cell is from plants or animals,where a eukarytotic cell is from bacteria",20,200);
+		canvasContext.fillText("(Press 2)An eukarytotic cell is from plants or animals,where a prokaryotic cell is from bacteria",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		heart = heart - 1
+		questions2 = true
+		immune()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		hit = true
+		questions2 = true
+		immune()
+	
+} else {
+	window.setTimeout(question3, 100);
+}
+
+
+
+
+}
+	Key1 = false
+	Key2 = false
+
+}
+
+//################################\\
+//New Function
+//################################// 
+
+function dmgbar2() {
+
+console.log("dmg")
+	canvasContext.fillStyle = 'black';
+	canvasContext.fillRect(255,450,260,80);
+	
+	canvasContext.fillStyle = 'red';
+	canvasContext.fillRect(260,455,50,70);
+	
+	canvasContext.fillStyle = 'green';
+	canvasContext.fillRect(310,455,50,70);
+	
+	canvasContext.fillStyle = 'blue';
+	canvasContext.fillRect(360,455,50,70);
+	
+	canvasContext.fillStyle = 'green';
+	canvasContext.fillRect(410,455,50,70);
+	
+	canvasContext.fillStyle = 'red';
+	canvasContext.fillRect(460,455,50,70);
+	
+	canvasContext.fillStyle = 'black';
+	canvasContext.fillRect(lineX,475,10,50);
+	
+	canvasContext.fillStyle = 'black';
+	canvasContext.font = ('30px Arial');
+	canvasContext.fillText("25",270,505);
+	
+	canvasContext.fillStyle = 'black';
+	canvasContext.font = ('30px Arial');
+	canvasContext.fillText("50",320,505);
+	
+	canvasContext.fillStyle = 'black';
+	canvasContext.font = ('30px Arial');
+	canvasContext.fillText("100",360,505);
+	
+	canvasContext.fillStyle = 'black';
+	canvasContext.font = ('30px Arial');
+	canvasContext.fillText("50",420,505);
+	
+	canvasContext.fillStyle = 'black';
+	canvasContext.font = ('30px Arial');
+	canvasContext.fillText("25",470,505);
+	
+	if (lineX > 260 && turn === false){
+	lineX = lineX - 2
+	}else if(lineX < 500 && turn === true){
+	lineX = lineX + 2
+	}else if (lineX === 259){
+	turn = true
+	}else if (lineX === 501){
+	turn = false
+	}
+	
+	if (Key1 === true) {
+		Key1 = false
+		hit = false
+		if (lineX > 258 && lineX < 308 || lineX > 459 && lineX < 501){
+		immunehp = immunehp - 25
+		}else if (lineX > 307 && lineX < 360|| lineX > 410 && lineX < 460){
+		immunehp = immunehp - 50
+		}else if (lineX > 359 && lineX < 409){
+		immunehp = immunehp - 100
+		}
+	}
+	Key1 = false
+	Key2 = false
+	window.setTimeout(immune, 10);
+	
+	
+
+
+
 
 
 
 }
 
+//################################\\
+//New Function
+//################################// 
+
+function immune() {
+console.log("immune")
+	draw()
+	if (immunehp < 1) {
+	canvasContext.fillText("Well done you have beaten the game!",170,150);
+	canvasContext.fillText("...",300,180);
+	
+	base_image = new Image();
+	base_image.src = (virus);
+	canvasContext.drawImage(base_image,305,200);
+	
+	bloodhp = 200
+	rand = random()
+	if (rand === 0) {
+		return;
+	}else if (rand === 1) {
+		return;
+	}
+	
+	}
+
+		
+		base_image = new Image();
+		base_image.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_AqXY0tZLXoonwPkYBCcAY7ftmCFn9J-fnaVhCoutaVmA2ZCN'		
+		canvasContext.drawImage(base_image,255,250);
+			
+		canvasContext.fillStyle = 'black';
+		canvasContext.font = ('50px Arial');
+		canvasContext.fillText("Health:"+immunehp,250,250);
+		
+	if (hit === false) {
+		canvasContext.fillStyle = 'black';
+		canvasContext.font = ('40px Arial');
+		canvasContext.fillText("You have encountered the Aquired Immune ",12,100);
+		canvasContext.fillText("System. What should you do?",130,150);
+		
+		canvasContext.fillStyle = 'blue';
+		canvasContext.fillRect(105,500,150,60);
+		
+		canvasContext.fillStyle = 'black';
+		canvasContext.font = ('30px Arial');
+		canvasContext.fillText("Fight!",150,530);
+		
+		canvasContext.fillStyle = 'black';
+		canvasContext.font = ('12px Arial');
+		canvasContext.fillText("(Type 1)",155,550);
+		
+		canvasContext.fillStyle = 'blue';
+		canvasContext.fillRect(505,500,150,60);
+		
+		canvasContext.fillStyle = 'black';
+		canvasContext.font = ('30px Arial');
+		canvasContext.fillText("Run!",550,530);
+		
+		canvasContext.fillStyle = 'black';
+		canvasContext.font = ('12px Arial');
+		canvasContext.fillText("(Type 2)",555,550);
+		
+		if (Key1 === true) {
+		Key1 = false
+		question3()
+		
+	} else if (Key2 === true) {
+		Key2 = false
+		escape()
+
+	} else {
+		window.setTimeout(immune, 100);
+	}
+		
+	}else {
+		dmgbar2()
+	
+	
+	}
+	
+	
+
+
+}
+
+//################################\\
+//New Function
+//################################// 
+
+function lungs () {
+immune()
+
+
+}
+
+//################################\\
+//New Function
+//################################// 
 
 function question2() {
 draw()
-	var randy = 100
-	randy = Math.floor(Math.random() * 1);
+	
+	if (question1 === true) {
+	randy = Math.floor(Math.random() * 11);
+	question1 = false
+	}
 	if (randy === 0) {
 		canvasContext.fillStyle = 'black';
 		canvasContext.font = ('40px Arial');
-		canvasContext.fillText("What is a Pathogen?",12,100);
+		canvasContext.fillText("What is a helper T-cell and its function.",12,100);
 		canvasContext.font = ('20px Arial');
-		canvasContext.fillText("(Press 1)A non living substance that can cause disease",20,200);
-		canvasContext.fillText("(Press 2)A living substance that can cause disease",20,300);
+		canvasContext.fillText("(Press 1)A T-cell that controls the activity of other cells of the immune system.",20,200);
+		canvasContext.fillText("(Press 2)A T-cell that only activates B-cells.",20,300);
 		
 	if (Key1 === true) {
 		Key1 = false
 		hit = true
+		question1 = true
 		bloodcell()
 	
 } else if (Key2 === true) {
 		Key2 = false
 		heart = heart - 1
+		question1 = true
 		bloodcell()
 	
 } else {
@@ -93,59 +542,235 @@ draw()
 }
 		
 	}else if (randy === 1) {
-		draw()
-		canvasContext.fillStyle = 'black';
-		canvasContext.font = ('40px Arial');
-		canvasContext.fillText("What is a Pathogen?",12,50);
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What is an infectious disease?",12,100);
 		canvasContext.font = ('20px Arial');
-		canvasContext.fillText("(Press 1)A non living substance that can cause disease",20,200);
-		canvasContext.fillText("(Press 2)A living substance that can cause disease",20,300);
+		canvasContext.fillText("(Press 1)A disease that can be transfered from one person to another.",20,200);
+		canvasContext.fillText("(Press 2)A disease that can only be transfered through indirect contact and direct contact.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		hit = true
+		question1 = true
+		bloodcell()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		heart = heart - 1
+		question1 = true
+		bloodcell()
+	
+} else {
+	window.setTimeout(question2, 100);
+}
 	}else if (randy === 2) {
-		canvasContext.fillStyle = 'black';
-		canvasContext.font = ('40px Arial');
-		canvasContext.fillText("What is a Pathogen?",12,50);
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What is a B-cell and its function?",12,100);
 		canvasContext.font = ('20px Arial');
-		canvasContext.fillText("(Press 1)A non living substance that can cause disease",20,200);
-		canvasContext.fillText("(Press 2)A living substance that can cause disease",20,300);
+		canvasContext.fillText("(Press 1)A cell that is resposible for producing antibodies.",20,200);
+		canvasContext.fillText("(Press 2)A cell that is responsible for producing antigens.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		hit = true
+		question1 = true
+		bloodcell()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		heart = heart - 1
+		question1 = true
+		bloodcell()
+	
+} else {
+	window.setTimeout(question2, 100);
+}
 	}else if (randy === 3) {
-		canvasContext.fillStyle = 'black';
-		canvasContext.font = ('40px Arial');
-		canvasContext.fillText("What is a Pathogen?",12,50);
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What is a killer T-cell and its function?",12,100);
 		canvasContext.font = ('20px Arial');
-		canvasContext.fillText("(Press 1)A non living substance that can cause disease",20,200);
-		canvasContext.fillText("(Press 2)A living substance that can cause disease",20,300);
+		canvasContext.fillText("(Press 1)A cell that kills cancer cells by itself.",20,200);
+		canvasContext.fillText("(Press 2)A cell that can kill HIV viruses by itself.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		hit = true
+		question1 = true
+		bloodcell()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		heart = heart - 1
+		question1 = true
+		bloodcell()
+	
+} else {
+	window.setTimeout(question2, 100);
+}
 	}else if (randy === 4) {
-		canvasContext.fillStyle = 'black';
-		canvasContext.font = ('40px Arial');
-		canvasContext.fillText("What is a Pathogen?",12,50);
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What is a memory B-cell and its function?",12,100);
 		canvasContext.font = ('20px Arial');
-		canvasContext.fillText("(Press 1)A non living substance that can cause disease",20,200);
-		canvasContext.fillText("(Press 2)A living substance that can cause disease",20,300);
+		canvasContext.fillText("(Press 1) A cell that provides immunity because of certain antibodies for certain viruses.",20,200);
+		canvasContext.fillText("(Press 2)An antibody factory that produces antibodies for certain viruses.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		hit = true
+		question1 = true
+		bloodcell()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		heart = heart - 1
+		question1 = true
+		bloodcell()
+	
+} else {
+	window.setTimeout(question2, 100);
+}
 	}else if (randy === 5) {
-		canvasContext.fillStyle = 'black';
-		canvasContext.font = ('40px Arial');
-		canvasContext.fillText("What is a Pathogen?",12,50);
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What is a plasma cell and its function?",12,100);
 		canvasContext.font = ('20px Arial');
-		canvasContext.fillText("(Press 1)A non living substance that can cause disease",20,200);
-		canvasContext.fillText("(Press 2)A living substance that can cause disease",20,300);
+		canvasContext.fillText("(Press 1)A B-cell that produces a single type of antibody.",20,200);
+		canvasContext.fillText("(Press 2)A B-cell that provides immunity.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		hit = true
+		question1 = true
+		bloodcell()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		heart = heart - 1
+		question1 = true
+		bloodcell()
+	
+} else {
+	window.setTimeout(question2, 100);
+}
 	}else if (randy === 6) {
-		canvasContext.fillStyle = 'black';
-		canvasContext.font = ('40px Arial');
-		canvasContext.fillText("What is a Pathogen?",12,50);
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What is a dendritic cell and its function?",12,100);
 		canvasContext.font = ('20px Arial');
-		canvasContext.fillText("(Press 1)A non living substance that can cause disease",20,200);
-		canvasContext.fillText("(Press 2)A living substance that can cause disease",20,300);
+		canvasContext.fillText("(Press 1)To reveal antigens and pathogens.",20,200);
+		canvasContext.fillText("(Press 2)The main function is to process antigen material and present it on the cell surface to the helper T-cells.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		heart = heart - 1
+		question1 = true
+		bloodcell()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		hit = true
+		question1 = true
+		bloodcell()
+	
+} else {
+	window.setTimeout(question2, 100);
+}
 	}else if (randy === 7) {
-		canvasContext.fillStyle = 'black';
-		canvasContext.font = ('40px Arial');
-		canvasContext.fillText("What is a Pathogen?",12,50);
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What are three ways bacteria can be helpful?",12,100);
 		canvasContext.font = ('20px Arial');
-		canvasContext.fillText("(Press 1)A non living substance that can cause disease",20,200);
-		canvasContext.fillText("(Press 2)A living substance that can cause disease",20,300);
+		canvasContext.fillText("(Press 1)Making cheese, yoghurt, and probiotics.",20,200);
+		canvasContext.fillText("(Press 2)Compost, Digestion, and recycling nutrients.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		heart = heart - 1
+		question1 = true
+		bloodcell()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		hit = true
+		question1 = true
+		bloodcell()
+	
+} else {
+	window.setTimeout(question2, 100);
+}
+}else if (randy === 8) {
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What are phagocytes?",12,100);
+		canvasContext.font = ('20px Arial');
+		canvasContext.fillText("(Press 1)A type of T-cell that is capable of engulfing viruses and bacteria.",20,200);
+		canvasContext.fillText("(Press 2)A type of white blood cell that is capable of engulfing viruses and bacteria.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		heart = heart - 1
+		question1 = true
+		bloodcell()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		hit = true
+		question1 = true
+		bloodcell()
+	
+} else {
+	window.setTimeout(question2, 100);
+}
+
+}else if (randy === 9){
+
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What is immunity?",12,100);
+		canvasContext.font = ('20px Arial');
+		canvasContext.fillText("(Press 1)The ability of an organism to resist a particular infection by the action of specific antibodies.",20,200);
+		canvasContext.fillText("(Press 2)The ability of the helper T-cell to resist a particulr infection by the action of specific antibodies.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		heart = heart - 1
+		question1 = true
+		bloodcell()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		hit = true
+		question1 = true
+		bloodcell()
+	
+} else {
+	window.setTimeout(question2, 100);
+}
+
+}else if (randy === 10) {
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What are the differences between a eukaryotic cell and a prokaryotic cell?",12,100);
+		canvasContext.font = ('20px Arial');
+		canvasContext.fillText("(Press 1)An prokaryotic cell is from plants or animals,where a eukarytotic cell is from bacteria",20,200);
+		canvasContext.fillText("(Press 2)An eukarytotic cell is from plants or animals,where a prokaryotic cell is from bacteria",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		heart = heart - 1
+		question1 = true
+		bloodcell()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		hit = true
+		question1 = true
+		bloodcell()
+	
+} else {
+	window.setTimeout(question2, 100);
+}
+
+
+
+
 }
 	Key1 = false
 	Key2 = false
-
 
 }
 
@@ -403,8 +1028,13 @@ function assembly() {
 //################################// 
 
 function synthesis() {
+	base_image = new Image();
+	base_image.src = 'data:image/png;base64,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';
+	canvasContext.drawImage(base_image,300,300);
+	
 	if (turn3 === true) {
 	return;
+	
 	
 	}
 	console.log(synthesis1)
@@ -607,6 +1237,8 @@ function injection() {
 		return
 	
 } else {
+	Key1 = false
+	Key2 = false
 	window.setTimeout(injection, 200);
 }
 		
@@ -678,6 +1310,7 @@ function wrong() {
 	Key1 = false
 	Key2 = false
 	window.setTimeout(attachment, 100)
+	return
 
 }
 
@@ -809,7 +1442,31 @@ function options() {
 	
 	canvasContext.fillStyle = 'black';
 	canvasContext.font = ('12px Arial');
-	canvasContext.fillText("(Type 2)",355,220);
+	canvasContext.fillText("(Type 2)",355,290);
+	
+	canvasContext.fillStyle = 'blue';
+	canvasContext.fillRect(305,240,150,60);
+	
+	canvasContext.fillStyle = 'black';
+	canvasContext.font = ('30px Arial');
+	canvasContext.fillText("Cell",340,270);
+	
+	canvasContext.fillStyle = 'black';
+	canvasContext.font = ('12px Arial');
+	canvasContext.fillText("(Type 3)",355,290);
+	
+	canvasContext.fillStyle = 'blue';
+	canvasContext.fillRect(305,310,150,60);
+	
+	canvasContext.fillStyle = 'black';
+	canvasContext.font = ('30px Arial');
+	canvasContext.fillText("Boss",330,340);
+	
+	canvasContext.fillStyle = 'black';
+	canvasContext.font = ('12px Arial');
+	canvasContext.fillText("(Type 4)",355,360);
+	
+	
 	
 	if (Key1 === true) {
 	Key1 = false
@@ -819,10 +1476,10 @@ function options() {
 		throat()
 	}else if (Key3 === true) {
 		Key3 = false
-		assembly()
+		cell()
 	}else if (Key4 === true) {
 		Key4 = false
-		
+		lungs()
 	}else if (Key5 === true) {
 		Key5 = false
 		
@@ -863,7 +1520,7 @@ function cell() {
 function escape() {
 	Key1 = false
 	Key2 = false
-alert("You escaped but took 1 damage.")
+alert("You escaped the body!")
 
 }
 
@@ -950,8 +1607,11 @@ function dmgbar() {
 
 function question1() {
 	draw()
-	var randy = 100
-	randy = Math.floor(Math.random() * 1);
+	
+	if (question === true) {
+	randy = Math.floor(Math.random() * 11);
+	question = false
+	}
 	if (randy === 0) {
 		canvasContext.fillStyle = 'black';
 		canvasContext.font = ('40px Arial');
@@ -963,11 +1623,13 @@ function question1() {
 	if (Key1 === true) {
 		Key1 = false
 		hit = true
+		question = true
 		mucus()
 	
 } else if (Key2 === true) {
 		Key2 = false
 		heart = heart - 1
+		question = true
 		mucus()
 	
 } else {
@@ -975,55 +1637,232 @@ function question1() {
 }
 		
 	}else if (randy === 1) {
-		draw()
-		canvasContext.fillStyle = 'black';
-		canvasContext.font = ('40px Arial');
-		canvasContext.fillText("What is a Pathogen?",12,50);
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What is an antigen?",12,100);
 		canvasContext.font = ('20px Arial');
-		canvasContext.fillText("(Press 1)A non living substance that can cause disease",20,200);
-		canvasContext.fillText("(Press 2)A living substance that can cause disease",20,300);
+		canvasContext.fillText("(Press 1)A substance that activates an immune response in the body.",20,200);
+		canvasContext.fillText("(Press 2)A substance that can cause a disease.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		hit = true
+		question = true
+		mucus()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		heart = heart - 1
+		question = true
+		mucus()
+	
+} else {
+	window.setTimeout(question1, 100);
+}
 	}else if (randy === 2) {
-		canvasContext.fillStyle = 'black';
-		canvasContext.font = ('40px Arial');
-		canvasContext.fillText("What is a Pathogen?",12,50);
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What is an antibody?",12,100);
 		canvasContext.font = ('20px Arial');
-		canvasContext.fillText("(Press 1)A non living substance that can cause disease",20,200);
-		canvasContext.fillText("(Press 2)A living substance that can cause disease",20,300);
+		canvasContext.fillText("(Press 1)A blood protein produced to disable a specific antigen.",20,200);
+		canvasContext.fillText("(Press 2)A cell that can disable a specific antigen.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		hit = true
+		question = true
+		mucus()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		heart = heart - 1
+		question = true
+		mucus()
+	
+} else {
+	window.setTimeout(question1, 100);
+}
 	}else if (randy === 3) {
-		canvasContext.fillStyle = 'black';
-		canvasContext.font = ('40px Arial');
-		canvasContext.fillText("What is a Pathogen?",12,50);
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What are the main symptoms of inflammation?",12,100);
 		canvasContext.font = ('20px Arial');
-		canvasContext.fillText("(Press 1)A non living substance that can cause disease",20,200);
-		canvasContext.fillText("(Press 2)A living substance that can cause disease",20,300);
+		canvasContext.fillText("(Press 1)Redness, swelling, and a fever.",20,200);
+		canvasContext.fillText("(Press 2)feeling hot, sweating, and fatigue.	",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		hit = true
+		question = true
+		mucus()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		heart = heart - 1
+		question = true
+		mucus()
+	
+} else {
+	window.setTimeout(question1, 100);
+}
 	}else if (randy === 4) {
-		canvasContext.fillStyle = 'black';
-		canvasContext.font = ('40px Arial');
-		canvasContext.fillText("What is a Pathogen?",12,50);
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What does HIV stand for? ",12,100);
 		canvasContext.font = ('20px Arial');
-		canvasContext.fillText("(Press 1)A non living substance that can cause disease",20,200);
-		canvasContext.fillText("(Press 2)A living substance that can cause disease",20,300);
+		canvasContext.fillText("(Press 1)Human Immunodeficiency Virus.",20,200);
+		canvasContext.fillText("(Press 2)Human Immuno Virus.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		hit = true
+		question = true
+		mucus()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		heart = heart - 1
+		question = true
+		mucus()
+	
+} else {
+	window.setTimeout(question1, 100);
+}
 	}else if (randy === 5) {
-		canvasContext.fillStyle = 'black';
-		canvasContext.font = ('40px Arial');
-		canvasContext.fillText("What is a Pathogen?",12,50);
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What is anaphylactic shock?",12,100);
 		canvasContext.font = ('20px Arial');
-		canvasContext.fillText("(Press 1)A non living substance that can cause disease",20,200);
-		canvasContext.fillText("(Press 2)A living substance that can cause disease",20,300);
+		canvasContext.fillText("(Press 1)A life-threatening allergic reaction to an antigen to which the body has become hypersensitive.",20,200);
+		canvasContext.fillText("(Press 2)A allergic reaction that can cause a sickness for a few days.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		hit = true
+		question = true
+		mucus()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		heart = heart - 1
+		question = true
+		mucus()
+	
+} else {
+	window.setTimeout(question1, 100);
+}
 	}else if (randy === 6) {
-		canvasContext.fillStyle = 'black';
-		canvasContext.font = ('40px Arial');
-		canvasContext.fillText("What is a Pathogen?",12,50);
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What does AIDS stand for?",12,100);
 		canvasContext.font = ('20px Arial');
-		canvasContext.fillText("(Press 1)A non living substance that can cause disease",20,200);
-		canvasContext.fillText("(Press 2)A living substance that can cause disease",20,300);
+		canvasContext.fillText("(Press 1)Acquired Immunedeficiency Syndrome.",20,200);
+		canvasContext.fillText("(Press 2)Acquired Immunodeficiency Syndrome.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		heart = heart - 1
+		question = true
+		mucus()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		hit = true
+		question = true
+		mucus()
+	
+} else {
+	window.setTimeout(question1, 100);
+}
 	}else if (randy === 7) {
-		canvasContext.fillStyle = 'black';
-		canvasContext.font = ('40px Arial');
-		canvasContext.fillText("What is a Pathogen?",12,50);
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What is an allergen?",12,100);
 		canvasContext.font = ('20px Arial');
-		canvasContext.fillText("(Press 1)A non living substance that can cause disease",20,200);
-		canvasContext.fillText("(Press 2)A living substance that can cause disease",20,300);
+		canvasContext.fillText("(Press 1)A virus that causes an allergic reaction.",20,200);
+		canvasContext.fillText("(Press 2) A substance that causes an allergic reaction.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		heart = heart - 1
+		question = true
+		mucus()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		hit = true
+		question = true
+		mucus()
+	
+} else {
+	window.setTimeout(question1, 100);
+}
+}else if (randy === 8) {
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What are the four ways of transmitting diseases?",12,100);
+		canvasContext.font = ('20px Arial');
+		canvasContext.fillText("(Press 1)Indirect contact, direct contact, food, and water.",20,200);
+		canvasContext.fillText("(Press 2)Indirect contact, direct contact, food and water, and animal bites.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		heart = heart - 1
+		question = true
+		mucus()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		hit = true
+		question = true
+		mucus()
+	
+} else {
+	window.setTimeout(question1, 100);
+}
+
+}else if (randy === 9){
+
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What are the ways HIV can be transmitted?",12,100);
+		canvasContext.font = ('20px Arial');
+		canvasContext.fillText("(Press 1)Through blood and urine.",20,200);
+		canvasContext.fillText("(Press 2)Through blood and semen.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		heart = heart - 1
+		question = true
+		mucus()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		hit = true
+		question = true
+		mucus()
+	
+} else {
+	window.setTimeout(question1, 100);
+}
+
+}else if (randy === 10) {
+	canvasContext.font = ('40px Arial');
+		canvasContext.fillText("What is a booster shot?",12,100);
+		canvasContext.font = ('20px Arial');
+		canvasContext.fillText("(Press 1)A booster shot is a type of vaccine you get ever year.",20,200);
+		canvasContext.fillText("(Press 2)A booster shot is a re-exposure to the immunizing antigen.",20,300);
+		
+	if (Key1 === true) {
+		Key1 = false
+		heart = heart - 1
+		question = true
+		mucus()
+	
+} else if (Key2 === true) {
+		Key2 = false
+		hit = true
+		question = true
+		mucus()
+	
+} else {
+	window.setTimeout(question1, 100);
+}
+
+
+
+
 }
 	Key1 = false
 	Key2 = false
@@ -1424,4 +2263,15 @@ function draw() {
   
   
 </script>
+
+<h1>Image Sources</h1>
+<a href"https://goo.gl/Rr21Li"></a>
+<a href"https://goo.gl/1cZcTj"></a>
+<a href"https://goo.gl/FehGK6"></a>
+<a href"https://goo.gl/MvO8vH"></a>
+<a href"https://goo.gl/sPf75A"></a>
+<a href"https://goo.gl/aO53ei"></a>
+<a href"https://goo.gl/c4ovVJ"></a>
+
+
 
