@@ -45,26 +45,12 @@ var stop = 0
 var appleX = Math.floor(Math.random() * 39) * 20
 var appleY = Math.floor(Math.random() * 29) * 20
 var score = 0
-var random1 = Math.floor(Math.random() * 40) * 2
-var random2 = Math.floor(Math.random() * 40) * 2
+
 var canvas;
 var canvasContext;
-confirm ("You must answer one question to play")
-var answer = prompt ("what is " + random1 + " x " + random2 + " ?")
-math()
 
-function math() {
-if (answer == random1 * random2) {
-confirm ("Correct you may now play 1 game.")
-}
-else {
-confirm ("Wrong.")
-random1 = Math.floor(Math.random() * 40) * 2
-random2 = Math.floor(Math.random() * 40) * 2
-answer = prompt ("what is " + random1 + " x " + random2 + " ?")
-math()
-}
-}
+
+
 
 //End Of Function
 
